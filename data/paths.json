@@ -1,0 +1,96 @@
+{
+  "question": "What are you trying to find out?",
+  "options": [
+    {
+      "name": "Find what a power function looks like",
+      "child": {
+        "question": "Is the exponent positive or negative?",
+        "options": [
+          {
+            "name": "Positive",
+            "child": {
+              "question": "What is the format of the exponent?",
+              "options": [
+                {
+                  "name": "n, n ∈ W",
+                  "child": {
+                    "question": "Is n even, odd, or zero?",
+                    "options": [
+                      {
+                        "name": "Even",
+                        "child": {
+                          "equation": "y = x^2"
+                        }
+                      },
+                      {
+                        "name": "Odd",
+                        "child": {
+                          "equation": "y = x^3"
+                        }
+                      },
+                      {
+                        "name": "Zero",
+                        "child": {
+                          "equation": "y = x^0"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "1/n, n ∈ W",
+                  "child": {
+                    "equation": ""
+                  }
+                },
+                {
+                  "name": "m/n, m/n is not an integer",
+                  "child": {
+                    "question": "Is the denominator even or odd?",
+                    "options": [
+                      {
+                        "name": "even",
+                        "child": {
+                          "equation": ""
+                        }
+                      },
+                      {
+                        "name": "odd",
+                        "child": {
+                          "question": "Is the numerator even or odd?",
+                          "options": [
+                            {
+                              "name": "even",
+                              "child": {
+                                "equation": ""
+                              }
+                            },
+                            {
+                              "name": "odd",
+                              "child": {
+                                "equation": ""
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          { "name": "Negative", "child": { "equation": "" } }
+        ]
+      }
+    },
+    {
+      "name": "Find what a rational function looks like",
+      "child": { "equation": "" }
+    },
+    {
+      "name": "Find whether a function is invertible",
+      "child": { "equation": "" }
+    }
+  ]
+}
