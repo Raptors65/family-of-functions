@@ -34,8 +34,6 @@ const Equations: NextPage = () => {
     parsedPaths
   );
 
-  console.log(completedQuestions);
-
   const handleOptionClick = (j: number) => {
     const currentQuestion = currentPath as Question;
     const newlySavedQuestion = {
