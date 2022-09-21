@@ -19,7 +19,16 @@
                       {
                         "name": "Even",
                         "child": {
-                          "equation": "y = x^2"
+                          "equation": "x**n",
+                          "parameters": [
+                            {
+                              "symbol": "n",
+                              "min": 2,
+                              "max": "none",
+                              "requirements": ["even"],
+                              "value": "2"
+                            }
+                          ]
                         }
                       },
                       {
