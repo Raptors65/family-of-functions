@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import React, { useEffect, useRef, useState } from "react";
-import { Form } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
 import paths from "../data/paths.json";
 import * as d3 from "d3";
 

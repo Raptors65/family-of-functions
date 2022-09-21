@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { Button, Container } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 
 const Home: NextPage = () => {
   return (
