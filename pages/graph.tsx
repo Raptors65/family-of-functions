@@ -32,6 +32,7 @@ interface Parameters {
 type Parameter = {
   min?: number;
   max?: number;
+  step?: number;
   value: number;
   requirements: Requirement[];
 };
@@ -153,8 +154,7 @@ const Graph: NextPage = () => {
         for (let xValue = domain[0]; xValue <= domain[1]; xValue += 0.1) {
           const yValue = f(xValue);
           // if y value is in graph
-          if (yValue >= domain[0] && yValue <= domain[1]) {
-            data.push([xValue, yValue]);
+          if (yValue >= domain[0] - 2 && yValue <= domain[1] + 2) {
             // if last y value was not in graph, stil draw it so line appears complete
             if (!wasLastValueOk) {
               // ...as long as the previous x value is also in the graph
@@ -163,14 +163,21 @@ const Graph: NextPage = () => {
               }
               wasLastValueOk = true;
             }
-          } else if (wasLastValueOk) {
-            // if y value is not in graph but previous was, draw it so line is complete
             data.push([xValue, yValue]);
-            wasLastValueOk = false;
+          } else {
+            if (wasLastValueOk) {
+              // if y value is not in graph but previous was, draw it so line is complete
+              data.push([xValue, yValue]);
+              wasLastValueOk = false;
+            } else if (yValue < domain[0] - 2) {
+              data.push([xValue, domain[0] - 20]);
+            } else if (yValue > domain[1] + 2) {
+              data.push([xValue, domain[1] + 20]);
+            }
           }
         }
       }
-
+      console.log(data);
       x.domain([-10, 10]);
       y.domain([-10, 10]);
 
@@ -187,10 +194,12 @@ const Graph: NextPage = () => {
       xAxis(xAxisGroup.current!);
       yAxis(yAxisGroup.current!);
       path
-        .current!.attr("d", line(data))
-        .attr("fill", "none")
+        .current!.attr("fill", "none")
         .attr("stroke", "teal")
-        .attr("stroke-width", 2);
+        .attr("stroke-width", 2)
+        .transition()
+        .duration(3000)
+        .attr("d", line(data));
     }
   });
 
@@ -245,6 +254,7 @@ const Graph: NextPage = () => {
                 }
                 min={parameter.min}
                 max={parameter.max}
+                step={parameter.step}
                 type="number"
                 value={parameters[symbol].value}
               />

@@ -25,7 +25,8 @@
                               "min": 2,
                               "max": "none",
                               "requirements": ["even"],
-                              "value": "2"
+                              "step": 2,
+                              "value": 2
                             }
                           }
                         }
@@ -36,10 +37,11 @@
                           "equation": "x**n",
                           "parameters": {
                             "n": {
-                              "min": 2,
+                              "min": 3,
                               "max": "none",
                               "requirements": ["odd"],
-                              "value": "2"
+                              "step": 2,
+                              "value": 3
                             }
                           }
                         }
