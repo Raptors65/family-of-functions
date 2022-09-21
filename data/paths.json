@@ -27,7 +27,8 @@
                               "step": 2,
                               "value": 2
                             }
-                          }
+                          },
+                          "requirements": []
                         }
                       },
                       {
@@ -41,14 +42,16 @@
                               "step": 2,
                               "value": 3
                             }
-                          }
+                          },
+                          "requirements": []
                         }
                       },
                       {
                         "name": "Zero",
                         "child": {
-                          "equation": "x^^0",
-                          "parameters": {}
+                          "equation": "x**0",
+                          "parameters": {},
+                          "requirements": []
                         }
                       }
                     ]
@@ -65,8 +68,22 @@
                           "equation": "x**(1/n)",
                           "parameters": {
                             "n": {
-                              "min": 3,
+                              "min": 2,
                               "requirements": ["even"],
+                              "step": 2,
+                              "value": 2
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "name": "Odd",
+                        "child": {
+                          "equation": "x**(1/n)",
+                          "parameters": {
+                            "n": {
+                              "min": 3,
+                              "requirements": ["odd"],
                               "step": 2,
                               "value": 3
                             }
@@ -84,22 +101,56 @@
                       {
                         "name": "Even",
                         "child": {
-                          "equation": ""
+                          "equation": "x**(m/n)",
+                          "parameters": {
+                            "m": {
+                              "min": 1,
+                              "requirements": [],
+                              "step": 1,
+                              "value": 1
+                            },
+                            "n": {
+                              "min": 2,
+                              "requirements": ["even"],
+                              "step": 2,
+                              "value": 2
+                            }
+                          },
+                          "requirements": [
+                            "!Number.isInteger(parameters.m.value/parameters.n.value)"
+                          ]
                         }
                       },
                       {
-                        "name": "odd",
+                        "name": "Odd",
                         "child": {
                           "question": "Is the numerator even or odd?",
                           "options": [
                             {
-                              "name": "even",
+                              "name": "Even",
                               "child": {
-                                "equation": ""
+                                "equation": "x**(m/n)",
+                                "parameters": {
+                                  "m": {
+                                    "min": 2,
+                                    "requirements": ["even"],
+                                    "step": 2,
+                                    "value": 2
+                                  },
+                                  "n": {
+                                    "min": 3,
+                                    "requirements": ["odd"],
+                                    "step": 2,
+                                    "value": 3
+                                  }
+                                },
+                                "requirements": [
+                                  "!Number.isInteger(parameters.m.value/parameters.n.value)"
+                                ]
                               }
                             },
                             {
-                              "name": "odd",
+                              "name": "Odd",
                               "child": {
                                 "equation": ""
                               }

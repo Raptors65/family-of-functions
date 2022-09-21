@@ -23,6 +23,7 @@ type Option = {
 type Equation = {
   equation: string;
   parameters: Parameters;
+  requirements: string[];
 };
 
 interface Parameters {
@@ -140,7 +141,8 @@ const Graph: NextPage = () => {
               }
             }) &&
             (min === undefined || value >= min) &&
-            (max === undefined || value <= max)
+            (max === undefined || value <= max) &&
+            currentPath.requirements.every((requirement) => eval(requirement))
         )
       ) {
         let equation = currentPath.equation;
@@ -162,7 +164,9 @@ const Graph: NextPage = () => {
             if (!wasLastValueOk) {
               // ...as long as the previous x value is also in the graph
               if (xValue !== domain[0]) {
-                data.push([xValue - 0.1, f(xValue - 0.1)]);
+                const previousYValue = f(xValue - 0.1);
+                if (isFinite(previousYValue))
+                  data.push([xValue - 0.1, previousYValue]);
               }
               wasLastValueOk = true;
             }
@@ -172,11 +176,11 @@ const Graph: NextPage = () => {
               // if y value is not in graph but previous was, draw it so line is complete
               data.push([xValue, yValue]);
               wasLastValueOk = false;
-            } else if (yValue < domain[0] - 2) {
+            } /* else if (yValue < domain[0] - 2) {
               data.push([xValue, domain[0] - 20]);
             } else if (yValue > domain[1] + 2) {
               data.push([xValue, domain[1] + 20]);
-            }
+            }*/
           }
         }
       }
@@ -200,8 +204,8 @@ const Graph: NextPage = () => {
         .current!.attr("fill", "none")
         .attr("stroke", "teal")
         .attr("stroke-width", 2)
-        .transition()
-        .duration(3000)
+        /* .transition()
+        .duration(3000)*/
         .attr("d", line(data));
     }
   });
