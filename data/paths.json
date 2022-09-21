@@ -20,21 +20,28 @@
                         "name": "Even",
                         "child": {
                           "equation": "x**n",
-                          "parameters": [
-                            {
-                              "symbol": "n",
+                          "parameters": {
+                            "n": {
                               "min": 2,
                               "max": "none",
                               "requirements": ["even"],
                               "value": "2"
                             }
-                          ]
+                          }
                         }
                       },
                       {
                         "name": "Odd",
                         "child": {
-                          "equation": "y = x^3"
+                          "equation": "x**n",
+                          "parameters": {
+                            "n": {
+                              "min": 2,
+                              "max": "none",
+                              "requirements": ["odd"],
+                              "value": "2"
+                            }
+                          }
                         }
                       },
                       {

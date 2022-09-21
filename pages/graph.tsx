@@ -22,11 +22,14 @@ type Option = {
 
 type Equation = {
   equation: string;
-  parameters: Parameter[];
+  parameters: Parameters;
 };
 
+interface Parameters {
+  [symbol: string]: Parameter;
+}
+
 type Parameter = {
-  symbol: string;
   min?: number;
   max?: number;
   value: number;
@@ -42,10 +45,6 @@ type D3SVG = d3.Selection<
 
 type Requirement = "even" | "odd";
 
-interface ParameterValues {
-  [name: string]: number;
-}
-
 const parsedPaths = paths as Question;
 
 const Graph: NextPage = () => {
@@ -56,7 +55,7 @@ const Graph: NextPage = () => {
     parsedPaths
   );
 
-  const [parameterValues, setParameterValues] = useState<ParameterValues>({});
+  const [parameters, setParameters] = useState<Parameters>({});
 
   const handleOptionClick = (j: number) => {
     const currentQuestion = currentPath as Question;
@@ -71,15 +70,21 @@ const Graph: NextPage = () => {
     setCurrentPath(newPath);
 
     if ("equation" in newPath) {
-      newPath.parameters.forEach((parameter) => {
-        if (!(parameter.symbol in parameterValues)) {
-          setParameterValues({
-            ...parameterValues,
-            [parameter.symbol]: parameter.value,
-          });
-        }
-      });
+      setParameters(newPath.parameters);
     }
+  };
+
+  const handleParameterChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    symbol: string
+  ) => {
+    setParameters({
+      ...parameters,
+      [symbol]: {
+        ...parameters[symbol],
+        value: parseInt(event.target.value),
+      },
+    });
   };
 
   const domain = [-10, 10];
@@ -119,19 +124,51 @@ const Graph: NextPage = () => {
 
   useEffect(() => {
     if ("equation" in currentPath) {
-      let equation = currentPath.equation;
-      Object.entries(parameterValues).forEach(([key, value]) => {
-        equation = equation.replace(key, value.toString());
-      });
-
-      const f = (x: number) => {
-        return eval(equation);
-      };
-
       const data: [number, number][] = [];
-      for (let xValue = domain[0]; xValue <= domain[1]; xValue += 0.1) {
-        const yValue = f(xValue);
-        data.push([xValue, yValue]);
+
+      // Only render data if all parameters are valid
+      if (
+        Object.entries(parameters).every(([symbol, { requirements, value }]) =>
+          requirements.every((requirement) => {
+            switch (requirement) {
+              case "even":
+                return value % 2 === 0;
+              case "odd":
+                return value % 2 === 1;
+            }
+          })
+        )
+      ) {
+        let equation = currentPath.equation;
+        Object.entries(parameters).forEach(([key, { value }]) => {
+          equation = equation.replace(key, value.toString());
+        });
+
+        const f = (x: number) => {
+          return eval(equation);
+        };
+
+        let wasLastValueOk = false;
+        // Generate points
+        for (let xValue = domain[0]; xValue <= domain[1]; xValue += 0.1) {
+          const yValue = f(xValue);
+          // if y value is in graph
+          if (yValue >= domain[0] && yValue <= domain[1]) {
+            data.push([xValue, yValue]);
+            // if last y value was not in graph, stil draw it so line appears complete
+            if (!wasLastValueOk) {
+              // ...as long as the previous x value is also in the graph
+              if (xValue !== domain[0]) {
+                data.push([xValue - 0.1, f(xValue - 0.1)]);
+              }
+              wasLastValueOk = true;
+            }
+          } else if (wasLastValueOk) {
+            // if y value is not in graph but previous was, draw it so line is complete
+            data.push([xValue, yValue]);
+            wasLastValueOk = false;
+          }
+        }
       }
 
       x.domain([-10, 10]);
@@ -149,13 +186,11 @@ const Graph: NextPage = () => {
 
       xAxis(xAxisGroup.current!);
       yAxis(yAxisGroup.current!);
-
       path
         .current!.attr("d", line(data))
         .attr("fill", "none")
         .attr("stroke", "teal")
         .attr("stroke-width", 2);
-      console.log("hi");
     }
   });
 
@@ -198,30 +233,26 @@ const Graph: NextPage = () => {
       ) : (
         <>
           <p>{currentPath.equation}</p>
-          {currentPath.parameters.map((parameter) => {
+          {Object.entries(currentPath.parameters).map(([symbol, parameter]) => {
             return (
               <Form.Control
-                defaultValue={parameter.value}
-                key={parameter.symbol}
-                onChange={({ target }) =>
-                  setParameterValues({
-                    ...parameterValues,
-                    [parameter.symbol]: parseInt(target.value),
-                  })
+                key={symbol}
+                onChange={(e) =>
+                  handleParameterChange(
+                    e as React.ChangeEvent<HTMLInputElement>,
+                    symbol
+                  )
                 }
                 min={parameter.min}
                 max={parameter.max}
                 type="number"
-                value={parameterValues[parameter.symbol]}
+                value={parameters[symbol].value}
               />
             );
           })}
         </>
       )}
-      <svg
-        id="root"
-        onClick={() => setCurrentPath({ ...currentPath, equation: "x**3" })}
-      ></svg>
+      <svg id="root"></svg>
     </>
   );
 };
