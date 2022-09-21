@@ -129,15 +129,18 @@ const Graph: NextPage = () => {
 
       // Only render data if all parameters are valid
       if (
-        Object.entries(parameters).every(([symbol, { requirements, value }]) =>
-          requirements.every((requirement) => {
-            switch (requirement) {
-              case "even":
-                return value % 2 === 0;
-              case "odd":
-                return value % 2 === 1;
-            }
-          })
+        Object.entries(parameters).every(
+          ([symbol, { min, max, requirements, value }]) =>
+            requirements.every((requirement) => {
+              switch (requirement) {
+                case "even":
+                  return value % 2 === 0;
+                case "odd":
+                  return value % 2 === 1;
+              }
+            }) &&
+            (min === undefined || value >= min) &&
+            (max === undefined || value <= max)
         )
       ) {
         let equation = currentPath.equation;
