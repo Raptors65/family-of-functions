@@ -23,7 +23,7 @@ type Option = {
 type Equation = {
   equation: string;
   parameters: Parameters;
-  requirements: string[];
+  requirements: "noninteger"[];
 };
 
 interface Parameters {
@@ -93,8 +93,10 @@ const Graph: NextPage = () => {
   const margin = { top: 20, right: 50, bottom: 50, left: 50 };
   const width = 450 - margin.left - margin.right;
   const height = 400 - margin.top - margin.bottom;
-  const x = d3.scaleLinear().range([0, width]);
-  const y = d3.scaleLinear().range([height, 0]);
+  const x = d3.scaleLinear().domain([-10, 10]).range([0, width]);
+  const y = d3.scaleLinear().domain([-10, 10]).range([height, 0]);
+  x.domain([-10, 10]);
+  y.domain([-10, 10]);
   const graph = useRef<D3SVG>();
   const xAxisGroup = useRef<D3SVG>();
   const yAxisGroup = useRef<D3SVG>();
@@ -142,7 +144,14 @@ const Graph: NextPage = () => {
             }) &&
             (min === undefined || value >= min) &&
             (max === undefined || value <= max) &&
-            currentPath.requirements.every((requirement) => eval(requirement))
+            currentPath.requirements.every((requirement) => {
+              switch (requirement) {
+                case "noninteger":
+                  return !Number.isInteger(
+                    parameters.m.value / parameters.n.value
+                  );
+              }
+            })
         )
       ) {
         let equation = currentPath.equation;
@@ -156,10 +165,10 @@ const Graph: NextPage = () => {
 
         let wasLastValueOk = false;
         // Generate points
-        for (let xValue = domain[0]; xValue <= domain[1]; xValue += 0.1) {
+        for (let xValue = domain[0]; xValue <= domain[1]; xValue += 0.01) {
           const yValue = f(xValue);
           // if y value is in graph
-          if (yValue >= domain[0] - 2 && yValue <= domain[1] + 2) {
+          if (yValue >= domain[0] - 1 && yValue <= domain[1] + 1) {
             // if last y value was not in graph, stil draw it so line appears complete
             if (!wasLastValueOk) {
               // ...as long as the previous x value is also in the graph
@@ -185,8 +194,6 @@ const Graph: NextPage = () => {
         }
       }
       console.log(data);
-      x.domain([-10, 10]);
-      y.domain([-10, 10]);
 
       xAxisGroup.current = graph
         .current!.append("g")

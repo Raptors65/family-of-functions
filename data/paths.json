@@ -73,7 +73,8 @@
                               "step": 2,
                               "value": 2
                             }
-                          }
+                          },
+                          "requirements": []
                         }
                       },
                       {
@@ -87,7 +88,8 @@
                               "step": 2,
                               "value": 3
                             }
-                          }
+                          },
+                          "requirements": []
                         }
                       }
                     ]
@@ -116,9 +118,7 @@
                               "value": 2
                             }
                           },
-                          "requirements": [
-                            "!Number.isInteger(parameters.m.value/parameters.n.value)"
-                          ]
+                          "requirements": ["noninteger"]
                         }
                       },
                       {
@@ -144,15 +144,28 @@
                                     "value": 3
                                   }
                                 },
-                                "requirements": [
-                                  "!Number.isInteger(parameters.m.value/parameters.n.value)"
-                                ]
+                                "requirements": ["noninteger"]
                               }
                             },
                             {
                               "name": "Odd",
                               "child": {
-                                "equation": ""
+                                "equation": "x**(m/n)",
+                                "parameters": {
+                                  "m": {
+                                    "min": 3,
+                                    "requirements": ["odd"],
+                                    "step": 2,
+                                    "value": 3
+                                  },
+                                  "n": {
+                                    "min": 3,
+                                    "requirements": ["odd"],
+                                    "step": 2,
+                                    "value": 3
+                                  }
+                                },
+                                "requirements": ["noninteger"]
                               }
                             }
                           ]
@@ -164,7 +177,131 @@
               ]
             }
           },
-          { "name": "Negative", "child": { "equation": "" } }
+          {
+            "name": "Negative",
+            "child": {
+              "question": "What is the format of the exponent?",
+              "options": [
+                {
+                  "name": "-n, n ∈ W",
+                  "child": {
+                    "question": "Is n even or odd?",
+                    "options": [
+                      {
+                        "name": "Odd",
+                        "child": {
+                          "equation": "x**(-n)",
+                          "parameters": {
+                            "n": {
+                              "min": 1,
+                              "requirements": ["odd"],
+                              "step": 2,
+                              "value": 3
+                            }
+                          },
+                          "requirements": []
+                        }
+                      },
+                      {
+                        "name": "Even",
+                        "child": {
+                          "equation": "x**(-n)",
+                          "parameters": {
+                            "n": {
+                              "min": 2,
+                              "requirements": ["even"],
+                              "step": 2,
+                              "value": 2
+                            }
+                          },
+                          "requirements": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "-m/n, m/n is not an integer",
+                  "child": {
+                    "question": "Is n even or odd?",
+                    "options": [
+                      {
+                        "name": "Even",
+                        "child": {
+                          "equation": "x**(-m/n)",
+                          "parameters": {
+                            "m": {
+                              "min": 1,
+                              "requirements": [],
+                              "step": 2,
+                              "value": 3
+                            },
+                            "n": {
+                              "min": 2,
+                              "requirements": ["even"],
+                              "step": 2,
+                              "value": 2
+                            }
+                          },
+                          "requirements": ["noninteger"]
+                        }
+                      },
+                      {
+                        "name": "Odd",
+                        "child": {
+                          "question": "Is m even or odd?",
+                          "options": [
+                            {
+                              "name": "Even",
+                              "child": {
+                                "equation": "x**(-m/n)",
+                                "parameters": {
+                                  "m": {
+                                    "min": 2,
+                                    "requirements": ["even"],
+                                    "step": 2,
+                                    "value": 2
+                                  },
+                                  "n": {
+                                    "min": 3,
+                                    "requirements": ["odd"],
+                                    "step": 2,
+                                    "value": 3
+                                  }
+                                },
+                                "requirements": ["noninteger"]
+                              }
+                            },
+                            {
+                              "name": "Odd",
+                              "child": {
+                                "equation": "x**(-m/n)",
+                                "parameters": {
+                                  "m": {
+                                    "min": 1,
+                                    "requirements": ["odd"],
+                                    "step": 2,
+                                    "value": 3
+                                  },
+                                  "n": {
+                                    "min": 3,
+                                    "requirements": ["odd"],
+                                    "step": 2,
+                                    "value": 3
+                                  }
+                                },
+                                "requirements": ["noninteger"]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
         ]
       }
     },
