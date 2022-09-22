@@ -95,11 +95,7 @@ const Graph: NextPage = () => {
   const height = 400 - margin.top - margin.bottom;
   const x = d3.scaleLinear().domain([-10, 10]).range([0, width]);
   const y = d3.scaleLinear().domain([-10, 10]).range([height, 0]);
-  x.domain([-10, 10]);
-  y.domain([-10, 10]);
   const graph = useRef<D3SVG>();
-  const xAxisGroup = useRef<D3SVG>();
-  const yAxisGroup = useRef<D3SVG>();
   const path =
     useRef<
       d3.Selection<SVGPathElement, [number, number][], HTMLElement, undefined>
@@ -118,13 +114,31 @@ const Graph: NextPage = () => {
 
     graph.current = svg
       .append("g")
-      .attr(
-        "transform",
-        "translate(" + margin.left + "," + margin.top + ")"
-      ) as D3SVG;
+      .attr("transform", `translate(${margin.left}, ${margin.top})`) as D3SVG;
 
     path.current = graph.current.append("path");
-  }, [height, margin.bottom, margin.left, margin.right, margin.top, width]);
+
+    const xAxisGroup = graph
+      .current!.append("g")
+      .attr("transform", `translate(0,${y(0)})`);
+    const yAxisGroup = graph
+      .current!.append("g")
+      .attr("transform", `translate(${x(0)},0)`);
+    graph
+      .current!.append("text")
+      .attr("transform", `translate(${x(10)}, ${y(0.2)})`)
+      .text("x");
+    graph
+      .current!.append("text")
+      .attr("transform", `translate(${x(0.2)}, ${y(10)})`)
+      .text("y");
+
+    const xAxis = d3.axisBottom(x);
+    const yAxis = d3.axisLeft(y);
+
+    xAxis(xAxisGroup);
+    yAxis(yAxisGroup);
+  }, []);
 
   useEffect(() => {
     if ("equation" in currentPath) {
@@ -195,18 +209,6 @@ const Graph: NextPage = () => {
       }
       console.log(data);
 
-      xAxisGroup.current = graph
-        .current!.append("g")
-        .attr("transform", `translate(0,${y(0)})`);
-      yAxisGroup.current = graph
-        .current!.append("g")
-        .attr("transform", `translate(${x(0)},0)`);
-
-      const xAxis = d3.axisBottom(x);
-      const yAxis = d3.axisLeft(y);
-
-      xAxis(xAxisGroup.current!);
-      yAxis(yAxisGroup.current!);
       path
         .current!.attr("fill", "none")
         .attr("stroke", "teal")

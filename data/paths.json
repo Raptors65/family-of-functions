@@ -281,7 +281,7 @@
                                     "min": 1,
                                     "requirements": ["odd"],
                                     "step": 2,
-                                    "value": 3
+                                    "value": 1
                                   },
                                   "n": {
                                     "min": 3,
