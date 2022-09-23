@@ -1,0 +1,36 @@
+{
+  "message": "You have been experiencing weird function magic. Yer a function harry",
+  "requirement": "true",
+  "children": [
+    {
+      "message": "You have a positive exponent",
+      "requirement": "m > 0",
+      "children": [
+        {
+          "message": "You have an integer exponent",
+          "requirement": "n === 1",
+          "ending": {
+            "graph": "/0-0-0-0.png",
+            "equation": "x^2"
+          }
+        }
+      ]
+    },
+    {
+      "message": "You have a negative exponent",
+      "requirement": "m < 0",
+      "ending": {
+        "equation": "y=x^3",
+        "graph": "0-0-0-0.png"
+      }
+    },
+    {
+      "message": "You have a zero exponent",
+      "requirement": "m === 0",
+      "ending": {
+        "equation": "y=x^10",
+        "graph": "0-0-0-2.png"
+      }
+    }
+  ]
+}

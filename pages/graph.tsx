@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import paths from "../data/paths.json";
 import * as d3 from "d3";
+import Container from "react-bootstrap/Container";
 
 type SavedQuestion = {
   question: string;
@@ -220,10 +221,10 @@ const Graph: NextPage = () => {
   });
 
   return (
-    <>
+    <Container>
       <h1>Hi</h1>
       {completedQuestions.map(({ question, options, chosenOption }, i) => (
-        <div className="saved-question" key={i}>
+        <div key={i}>
           <p>{question}</p>
           {options.map((option, j) => (
             <Form.Check key={`${i}-${j}`}>
@@ -241,7 +242,7 @@ const Graph: NextPage = () => {
         </div>
       ))}
       {"question" in currentPath ? (
-        <div className="current-question">
+        <div>
           <p>{currentPath.question}</p>
           {currentPath.options.map(({ name }, j) => (
             <Form.Check key={`${completedQuestions.length}-${j}`}>
@@ -279,7 +280,7 @@ const Graph: NextPage = () => {
         </>
       )}
       <svg id="root"></svg>
-    </>
+    </Container>
   );
 };
 
