@@ -19,7 +19,7 @@
               }
             },
             {
-              "message": "You have an even exponent",
+              "message": "You have an even exponent, you're now in the house led by the parabolas",
               "requirement": "m % 2 === 0",
               "ending": {
                 "equation": "y = x^2",

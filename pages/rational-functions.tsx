@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -10,8 +10,8 @@ const Algebrite = require("algebrite");
 
 const RationalFunctions: NextPage = () => {
   const [displayedText, setDisplayedText] = useState<string[]>([""]);
-  const [numerator, setNumerator] = useState("");
-  const [denominator, setDenominator] = useState("");
+  const [numerator, setNumerator] = useState("x^2-1");
+  const [denominator, setDenominator] = useState("x^2-2x-3");
   const [hasStarted, setHasStarted] = useState(false);
   const [paragraphs, setParagraphs] = useState<string[]>([]);
   const [equation, setEquation] = useState("");
