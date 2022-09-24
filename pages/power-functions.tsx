@@ -4,8 +4,7 @@ import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import equations from "../data/equations.json";
-import styles from "./power-functions.module.css";
+import powerFunctionsPaths from "../data/power-functions-paths.json";
 
 const Algebrite = require("algebrite");
 
@@ -21,7 +20,7 @@ type Ending = {
   graph: string;
 };
 
-const equationsPath = equations as Node;
+const equationsPath = powerFunctionsPaths as Node;
 
 const PowerFunctions: NextPage = () => {
   const [displayedText, setDisplayedText] = useState<string[]>([""]);
@@ -71,10 +70,6 @@ const PowerFunctions: NextPage = () => {
       paragraphs[paragraphs.length - 1].length;
 
   useEffect(() => {
-    document.body.classList.add(styles.body);
-  }, []);
-
-  useEffect(() => {
     if (hasStarted && !hasFinished) {
       const lastDisplayedIndex = displayedText.length - 1;
       const lastDisplayedLetterIndex =
@@ -110,12 +105,11 @@ const PowerFunctions: NextPage = () => {
 
   return (
     <Container className="mt-4">
-      <h1 className={styles.harryPotter}>
-        Families of Functions - Power Functions
-      </h1>
+      <h1 className="harry-potter">Families of Functions - Power Functions</h1>
       <p>
         You are now in the magical world of Hogwarts - Power Functions Edition.
-        Please choose your exponent.
+        Please choose your exponent. (If you want an integer exponent, set
+        denominator = 1 and your numerator will be your exponent)
       </p>
       {!hasStarted ? (
         <Form>
@@ -158,13 +152,18 @@ const PowerFunctions: NextPage = () => {
             Start
           </Button>
         </Form>
-      ) : null}
+      ) : (
+        <p>
+          y = x^({sign === "negative" ? "-" : null}
+          {Algebrite.run(`${numerator}/${denominator}`)})
+        </p>
+      )}
       {displayedText.map((paragraph, i) => (
         <p key={i.toString()}>{paragraph}</p>
       ))}
       {hasFinished ? (
         <div>
-          <p>{equation}</p>
+          <p>Meet one of the other functions in your house: {equation}</p>
           <Image alt="Equation graph" src={graph} width={200} height={200} />
         </div>
       ) : null}

@@ -1,0 +1,226 @@
+{
+  "message": "You have been experiencing weird function magic. Yer a function harry. the function sorting hat talks to you for some reason",
+  "requirement": "true",
+  "children": [
+    {
+      "message": "You have a positive exponent",
+      "requirement": "m > 0",
+      "children": [
+        {
+          "message": "You have an integer exponent",
+          "requirement": "n === 1",
+          "children": [
+            {
+              "message": "You have an odd exponent",
+              "requirement": "m % 2 === 1",
+              "ending": {
+                "equation": "y = x^3",
+                "graph": "/0-0-0-0.png"
+              }
+            },
+            {
+              "message": "You have an even exponent",
+              "requirement": "m % 2 === 0",
+              "ending": {
+                "equation": "y = x^2",
+                "graph": "/0-0-0-0.png"
+              }
+            }
+          ]
+        },
+        {
+          "message": "You have a rational exponent",
+          "requirement": "n !== 1",
+          "children": [
+            {
+              "message": "The denominator is even",
+              "requirement": "n % 2 === 0",
+              "children": [
+                {
+                  "message": "it is concave up",
+                  "requirement": "m > n",
+                  "ending": {
+                    "equation": "y = x^(5/2)",
+                    "graph": "/0-0-0-0.png"
+                  }
+                },
+                {
+                  "message": "it is concave down",
+                  "requirement": "m < n",
+                  "ending": {
+                    "equation": "y = x^(1/2)",
+                    "graph": "/0-0-0-0.png"
+                  }
+                }
+              ]
+            },
+            {
+              "message": "The denominator is odd",
+              "requirement": "n % 2 === 1",
+              "children": [
+                {
+                  "message": "The numerator is odd",
+                  "requirement": "m % 2 === 1",
+                  "children": [
+                    {
+                      "message": "concave up",
+                      "requirement": "m > n",
+                      "ending": {
+                        "equation": "y = x^(7/3)",
+                        "graph": "/0-0-0-0.png"
+                      }
+                    },
+                    {
+                      "message": "concave down",
+                      "requirement": "m < n",
+                      "ending": {
+                        "equation": "y = x^(3/7)",
+                        "graph": "/0-0-0-0.png"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "message": "Numerator even",
+                  "requirement": "m % 2 === 0",
+                  "children": [
+                    {
+                      "message": "concave up",
+                      "requirement": "m > n",
+                      "ending": {
+                        "equation": "y = x^(9/2)",
+                        "graph": "/0-0-0-0.png"
+                      }
+                    },
+                    {
+                      "message": "concave down",
+                      "requirement": "m < n",
+                      "ending": {
+                        "equation": "y = x^(2/9)",
+                        "graph": "/0-0-0-0.png"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "message": "You have a negative exponent",
+      "requirement": "m < 0",
+      "children": [
+        {
+          "message": "You have an integer exponent",
+          "requirement": "n === 1",
+          "children": [
+            {
+              "message": "You have an odd exponent",
+              "requirement": "m % 2 === 1",
+              "ending": {
+                "equation": "y = x^(-3)",
+                "graph": "/0-0-0-0.png"
+              }
+            },
+            {
+              "message": "You have an even exponent",
+              "requirement": "m % 2 === 0",
+              "ending": {
+                "equation": "y = x^(-2)",
+                "graph": "/0-0-0-0.png"
+              }
+            }
+          ]
+        },
+        {
+          "message": "You have a rational exponent",
+          "requirement": "n !== 1",
+          "children": [
+            {
+              "message": "The denominator is even",
+              "requirement": "n % 2 === 0",
+              "children": [
+                {
+                  "message": "it is concave up",
+                  "requirement": "m > n",
+                  "ending": {
+                    "equation": "y = x^(-5/2)",
+                    "graph": "/0-0-0-0.png"
+                  }
+                },
+                {
+                  "message": "it is concave down",
+                  "requirement": "m < n",
+                  "ending": {
+                    "equation": "y = x^(-1/2)",
+                    "graph": "/0-0-0-0.png"
+                  }
+                }
+              ]
+            },
+            {
+              "message": "The denominator is odd",
+              "requirement": "n % 2 === 1",
+              "children": [
+                {
+                  "message": "The numerator is odd",
+                  "requirement": "m % 2 === 1",
+                  "children": [
+                    {
+                      "message": "concave up",
+                      "requirement": "m > n",
+                      "ending": {
+                        "equation": "y = x^(-7/3)",
+                        "graph": "/0-0-0-0.png"
+                      }
+                    },
+                    {
+                      "message": "concave down",
+                      "requirement": "m < n",
+                      "ending": {
+                        "equation": "y = x^(-3/7)",
+                        "graph": "/0-0-0-0.png"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "message": "Numerator even",
+                  "requirement": "m % 2 === 0",
+                  "children": [
+                    {
+                      "message": "concave up",
+                      "requirement": "m > n",
+                      "ending": {
+                        "equation": "y = x^(-9/2)",
+                        "graph": "/0-0-0-0.png"
+                      }
+                    },
+                    {
+                      "message": "concave down",
+                      "requirement": "m < n",
+                      "ending": {
+                        "equation": "y = x^(-2/9)",
+                        "graph": "/0-0-0-0.png"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "message": "zero exponent",
+      "requirement": "m === 0",
+      "ending": {
+        "equation": "y = x^0",
+        "graph": "/0-0-0-0.png"
+      }
+    }
+  ]
+}
