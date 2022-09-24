@@ -22,9 +22,16 @@ const InvertibleFunctions: NextPage = () => {
           <a>Desmosempra!</a>
         </Link>
       </p>
+      <iframe
+        src="https://www.desmos.com/calculator/"
+        width={1200}
+        height={600}
+        frameBorder={0}
+        className="desmos"
+      ></iframe>
       <p>
         You also learn that there are ways to earn the certificate of
-        invertibility. Luckily, you have managed to find some top secretslides
+        invertibility. Luckily, you have managed to find some top secret slides
         that teach you how to earn this highly coveted honour.
       </p>
       <iframe
