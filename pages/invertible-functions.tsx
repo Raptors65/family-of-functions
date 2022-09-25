@@ -46,6 +46,11 @@ const InvertibleFunctions: NextPage = () => {
         height={569}
         allowFullScreen={true}
       ></iframe>
+      <p>
+        After gaining the ability to invert yourself, you are ready for the
+        competition!
+      </p>
+      <h1 className="harry-potter">To Be Continued</h1>
     </Container>
   );
 };
