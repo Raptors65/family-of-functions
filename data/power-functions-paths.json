@@ -1,17 +1,17 @@
 {
-  "message": "You have been experiencing weird function magic. Yer a function harry. the function sorting hat talks to you for some reason",
+  "message": "Unexpectedly, the function sorting hat talks to you.",
   "requirement": "true",
   "children": [
     {
-      "message": "You have a positive exponent",
+      "message": "You have a positive exponent.",
       "requirement": "m > 0",
       "children": [
         {
-          "message": "You have an integer exponent",
+          "message": "You have an integer exponent.",
           "requirement": "n === 1",
           "children": [
             {
-              "message": "You have an odd exponent, you're in the house of the odd powers \nThese are all odd functions that are symmetrical along the origin. \nThey occupy quadrant 1 and 3, having an upwards and downwards arm. \nGraphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic",
+              "message": "You have an odd exponent, you're in the house of the odd powers. These are all odd functions that are symmetrical along the origin. They occupy quadrant 1 and 3, having an upwards and downwards arm. Graphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic.",
               "requirement": "m % 2 === 1",
               "ending": {
                 "equation": "y = x^3",
@@ -19,7 +19,7 @@
               }
             },
             {
-              "message": "You have an even exponent, you're now in the house led by the parabolas \nThese are all even functions that are symmetrical along the y axis. They occupy quadrant 1 and 2, having 2 upwards arms in a U shape. \nGraphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic",
+              "message": "You have an even exponent, you're now in the house led by the parabolas. These are all even functions that are symmetrical along the y axis. They occupy quadrant 1 and 2, having 2 upwards arms in a U shape. Graphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic",
               "requirement": "m % 2 === 0",
               "ending": {
                 "equation": "y = x^2",
@@ -29,11 +29,11 @@
           ]
         },
         {
-          "message": "You have a rational exponent",
+          "message": "You have a rational exponent.",
           "requirement": "n !== 1",
           "children": [
             {
-              "message": "You have a denominator that is even",
+              "message": "You have a denominator that is even.",
               "requirement": "n % 2 === 0",
               "children": [
                 {
@@ -63,7 +63,7 @@
                   "requirement": "m % 2 === 1",
                   "children": [
                     {
-                      "message": "You have an odd/odd exponent, you're in the house of the odd-fraction powers \nThese are all odd functions that are symmetrical along the origin. \nThey occupy quadrant 1 and 3, having an upwards and downwards arm. \nGraphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic",
+                      "message": "You have an odd/odd exponent, you're in the house of the odd-fraction powers These are all odd functions that are symmetrical along the origin. They occupy quadrant 1 and 3, having an upwards and downwards arm. Graphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic",
                       "requirement": "m > n",
                       "ending": {
                         "equation": "y = x^(7/3)",
@@ -71,7 +71,7 @@
                       }
                     },
                     {
-                      "message": "Ah, the S-house\nThese graphs are all odd functions that occupy quadrants 1 and 3, and are a cousin to the odd powers. However, they curve down instead of up, and look like an S.",
+                      "message": "Ah, the S-house. These graphs are all odd functions that occupy quadrants 1 and 3, and are a cousin to the odd powers. However, they curve down instead of up, and look like an S.",
                       "requirement": "m < n",
                       "ending": {
                         "equation": "y = x^(3/7)",
@@ -81,11 +81,11 @@
                   ]
                 },
                 {
-                  "message": "You have an even/odd exponent, you're now in the house led by the fraction-parabolas \nThese are all even functions that are symmetrical along the y axis. They occupy quadrant 1 and 2, having 2 upwards arms in a U shape. \nGraphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic",
+                  "message": "You have an even/odd exponent, you're now in the house led by the fraction-parabolas. These are all even functions that are symmetrical along the y axis. They occupy quadrant 1 and 2, having 2 upwards arms in a U shape. Graphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic.",
                   "requirement": "m % 2 === 0",
                   "children": [
                     {
-                      "message": "concave up",
+                      "message": "You are also concave up",
                       "requirement": "m > n",
                       "ending": {
                         "equation": "y = x^(9/2)",
@@ -93,7 +93,7 @@
                       }
                     },
                     {
-                      "message": "You belong in house Seagallus, a cousin to the parabolas. \nThese are all even functions that are symmetrical along the y axis. They occupy quadrant 1 and 2, and have 2 downwards curving arms in either direction. Named after the mysterious seagull.",
+                      "message": "You belong in house Seagallus, a cousin to the parabolas. These are all even functions that are symmetrical along the y axis. They occupy quadrant 1 and 2, and have 2 downwards curving arms in either direction. Named after the mysterious seagull.",
                       "requirement": "m < n",
                       "ending": {
                         "equation": "y = x^(2/9)",
