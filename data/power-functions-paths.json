@@ -141,24 +141,10 @@
             {
               "message": "The denominator is even",
               "requirement": "n % 2 === 0",
-              "children": [
-                {
-                  "message": "it is concave up",
-                  "requirement": "m > n",
-                  "ending": {
-                    "equation": "y = x^(-5/2)",
-                    "graph": "/0-0-0-0.png"
-                  }
-                },
-                {
-                  "message": "it is concave down",
-                  "requirement": "m < n",
-                  "ending": {
-                    "equation": "y = x^(-1/2)",
-                    "graph": "/0-0-0-0.png"
-                  }
-                }
-              ]
+              "ending": {
+                "equation": "y = x^(-5/2)",
+                "graph": "/0-0-0-0.png"
+              }
             },
             {
               "message": "The denominator is odd",
@@ -167,46 +153,18 @@
                 {
                   "message": "The numerator is odd",
                   "requirement": "m % 2 === 1",
-                  "children": [
-                    {
-                      "message": "concave up",
-                      "requirement": "m > n",
-                      "ending": {
-                        "equation": "y = x^(-7/3)",
-                        "graph": "/0-0-0-0.png"
-                      }
-                    },
-                    {
-                      "message": "concave down",
-                      "requirement": "m < n",
-                      "ending": {
-                        "equation": "y = x^(-3/7)",
-                        "graph": "/0-0-0-0.png"
-                      }
-                    }
-                  ]
+                  "ending": {
+                    "equation": "y = x^(-3/5)",
+                    "graph": "/0-0-0-0.png"
+                  }
                 },
                 {
                   "message": "Numerator even",
                   "requirement": "m % 2 === 0",
-                  "children": [
-                    {
-                      "message": "concave up",
-                      "requirement": "m > n",
-                      "ending": {
-                        "equation": "y = x^(-9/2)",
-                        "graph": "/0-0-0-0.png"
-                      }
-                    },
-                    {
-                      "message": "concave down",
-                      "requirement": "m < n",
-                      "ending": {
-                        "equation": "y = x^(-2/9)",
-                        "graph": "/0-0-0-0.png"
-                      }
-                    }
-                  ]
+                  "ending": {
+                    "equation": "y = x^(-9/2)",
+                    "graph": "/0-0-0-0.png"
+                  }
                 }
               ]
             }
