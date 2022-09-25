@@ -85,7 +85,7 @@ const PowerFunctions: NextPage = () => {
               ...displayedText,
               paragraphs[lastDisplayedIndex + 1].charAt(0),
             ]),
-          20
+          10
         );
       } else {
         setTimeout(
@@ -97,7 +97,7 @@ const PowerFunctions: NextPage = () => {
                   lastDisplayedLetterIndex + 1
                 ),
             ]),
-          20
+          500
         );
       }
     }

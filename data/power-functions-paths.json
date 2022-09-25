@@ -1,17 +1,17 @@
 {
-  "message": "You have been experiencing weird function magic. One day, a hairy function came over to your house and said the words that changed your life: \"Yer a power function, Harry.\" You're now at the sorting ceremony where they sort new power functions into houses, and unexpectedly, the magical function sorting hat talks to you.",
+  "message": "Throughout your entire life, you, Harry Potter, have been experiencing weird function magic. One day, a hairy function came over to your house and said the words that changed your life: \"Yer a power function, Harry.\" You're now at the sorting ceremony where they sort new power functions into houses, and unexpectedly, the magical function sorting hat talks to you.",
   "requirement": "true",
   "children": [
     {
-      "message": "You have a positive exponent",
+      "message": "\"I see you have a positive exponent. This must mean you have no asymptotes.\"",
       "requirement": "m > 0",
       "children": [
         {
-          "message": "You have an integer exponent",
+          "message": "\"Your exponent is an integer as well, so your domain covers all the real numbers.\"",
           "requirement": "n === 1",
           "children": [
             {
-              "message": "You have an odd exponent",
+              "message": "Your exponent is odd.",
               "requirement": "m % 2 === 1",
               "ending": {
                 "equation": "y = x^3",

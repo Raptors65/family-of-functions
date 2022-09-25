@@ -19,7 +19,11 @@ const RationalFunctions: NextPage = () => {
 
   const handleStart = () => {
     setHasStarted(true);
-    const paragraphsGen: string[] = [];
+    const paragraphsGen: string[] = [
+      'Throughout your entire life, you, Harry Potter, have been experiencing weird function magic. One day, a hairy function came over to your house and said the words that changed your life: "Yer a rational function, Harry." You\'re now at the sorting ceremony where they sort new rational functions into houses, and unexpectedly, the magical function sorting hat talks to you.',
+      '"Hmm, difficult. VERY difficult."',
+      '"First, let\'s try to simplify you to see if you have any holes and to accurately assess your shape."',
+    ];
 
     const simplified = Algebrite.run(
       `simplify((${numerator})/(${denominator}))`
@@ -81,13 +85,33 @@ const RationalFunctions: NextPage = () => {
       denomConst,
     });
 
-    const hasVAs = VAs.length > 0;
-    if (hasVAs) {
+    if (hasHoles) {
       paragraphsGen.push(
-        `You have vertical asymptote(s) at x = ${VAs.join(", ")}`
+        '"You have holes, I see. Your numerator and denominator have a common factor."'
       );
     } else {
-      paragraphsGen.push("You have no vertical asymptotes");
+      paragraphsGen.push(
+        "\"You don't have holes, I see. Your numerator and denominator don't have a common factor.\""
+      );
+    }
+
+    const hasVAs = VAs.length > 0;
+    if (hasVAs) {
+      if (VAs.length > 1) {
+        paragraphsGen.push(
+          `"And you have vertical asymptotes at x = ${VAs.join(
+            ", "
+          )} because your denominator has a root there."`
+        );
+      } else {
+        paragraphsGen.push(
+          `"And you have a vertical asymptote at x = ${VAs[0]} because your denominator has a root there."`
+        );
+      }
+    } else {
+      paragraphsGen.push(
+        '"And you have no vertical asymptotes because your denominator has no roots."'
+      );
     }
 
     const otherAsymptotes =
@@ -103,27 +127,40 @@ const RationalFunctions: NextPage = () => {
 
     switch (otherAsymptotes) {
       case 0:
-        paragraphsGen.push("You have a horizontal asymptote at y = 0");
+        paragraphsGen.push(
+          '"Since the degree of your numerator is less than the degree of your denominator, you have a horizontal asymptote at y = 0."'
+        );
         break;
       case 1:
         paragraphsGen.push(
-          `Since the degree of num and denom are equal, you have a horizontal asymptote at y = ${Algebrite.run(
+          `Since the degree of your numerator and denominator are equal, you have a horizontal asymptote at y = ${Algebrite.run(
             `printhuman((${numConst})/(${denomConst}))`
-          )}`
+          )}, which is your numerator's constant term over your denominator's constant term.`
         );
         break;
       case 2:
-        paragraphsGen.push("There is an oblique asymptote");
+        paragraphsGen.push(
+          '"Since the degree of your numerator is one more than the degree of your denominator, you have an oblique asymptote."'
+        );
         break;
       case 3:
-        paragraphsGen.push("There is a parabolic asymptote");
+        paragraphsGen.push(
+          '"Since the degree of your numerator is two more than the degree of your denominator, you have a parabolic asymptote."'
+        );
         break;
       case 4:
-        paragraphsGen.push("There might be another asymptote");
+        paragraphsGen.push(
+          '"You\'re rare, the degree of your numerator is more than the degree of your denominator plus two! You probably have an interestingly shaped asymptote."'
+        );
         break;
     }
 
-    const ending = rationalFunctionsPaths[hasVAs ? 1 : 0][otherAsymptotes];
+    const ending =
+      rationalFunctionsPaths[hasHoles ? 1 : 0][hasVAs ? 1 : 0][otherAsymptotes];
+
+    paragraphsGen.push(
+      `You will be placed in the house of... ${ending.house.toUpperCase()}!`
+    );
 
     setParagraphs(paragraphsGen);
     setEquation(ending.equation);
@@ -151,7 +188,7 @@ const RationalFunctions: NextPage = () => {
               ...displayedText,
               paragraphs[lastDisplayedIndex + 1].charAt(0),
             ]),
-          20
+          500
         );
       } else {
         setTimeout(
@@ -163,7 +200,7 @@ const RationalFunctions: NextPage = () => {
                   lastDisplayedLetterIndex + 1
                 ),
             ]),
-          20
+          10
         );
       }
     }
@@ -208,7 +245,7 @@ const RationalFunctions: NextPage = () => {
       ))}
       {hasFinished ? (
         <div>
-          <p>{equation}</p>
+          <p>Meet another member of your house: {equation}</p>
           <Image alt="Equation graph" src={graph} width={200} height={200} />
         </div>
       ) : null}
