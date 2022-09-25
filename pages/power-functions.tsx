@@ -113,8 +113,8 @@ const PowerFunctions: NextPage = () => {
       <p>(For integer exponents, set the denominator to 0)</p>
       <p>
         He brought you to the Hogwarts For Magical Functions, and the next thing
-        you know, you&apos;re sitting on a chair in front of the whole school
-        with the magical function sorting hat on you.
+        you know, you’re sitting on a chair in front of the whole school with
+        the magical function sorting hat on you.
       </p>
       <p>
         “Hmm… Difficult…. Very Difficult…”, the hat ponders, “a
