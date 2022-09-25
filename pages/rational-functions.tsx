@@ -21,10 +21,10 @@ const RationalFunctions: NextPage = () => {
       return algebriteRes
         .split(",")
         .filter((root) => !root.includes("i"))
-        .map((root) => parseInt(root.replace(/[\[\]]/, "")));
+        .map((root) => root.replace(/[\[\]]/, ""));
     } else {
       // eslint-disable-next-line no-unused-vars
-      return [parseInt(algebriteRes)];
+      return [algebriteRes];
     }
   };
 
@@ -45,9 +45,7 @@ const RationalFunctions: NextPage = () => {
       .filter((root) => oDenomRoots.includes(root))
       .map((hole) => [
         hole,
-        +parseFloat(
-          Algebrite.run(simplified.replaceAll(/x/g, hole.toString()))
-        ).toFixed(2),
+        Algebrite.run(simplified.replaceAll(/x/g, hole.toString())),
       ]);
 
     const sNum = Algebrite.run(`numerator(${simplified})`);
@@ -70,13 +68,13 @@ const RationalFunctions: NextPage = () => {
     const numRoots = getRoots(numRootsResult);
 
     // eslint-disable-next-line no-unused-vars
-    const numConst = parseInt(Algebrite.run(`coeff(${sNum}, 0)`));
+    const numConst: string = Algebrite.run(`coeff(${sNum}, 0)`);
     // eslint-disable-next-line no-unused-vars
-    const denomConst = parseInt(Algebrite.run(`coeff(${sDenom}, 0)`));
+    const denomConst: string = Algebrite.run(`coeff(${sDenom}, 0)`);
 
     Algebrite.run("x = 0");
     // eslint-disable-next-line no-unused-vars
-    const yInt = parseInt(Algebrite.run(sNum));
+    const yInt: string = Algebrite.run(sNum);
 
     console.log({
       holes,
