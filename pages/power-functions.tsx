@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -30,10 +29,26 @@ const PowerFunctions: NextPage = () => {
   const [denominator, setDenominator] = useState(1);
   const [hasStarted, setHasStarted] = useState(false);
   const [paragraphs, setParagraphs] = useState<string[]>([]);
-  const [equation, setEquation] = useState("");
+  // const [equation, setEquation] = useState("");
   const [graph, setGraph] = useState("");
+  const [error, setError] = useState("");
 
   const handleStart = () => {
+    if (isNaN(numerator)) {
+      setError("Numerator is required");
+    }
+
+    if (isNaN(denominator)) {
+      setError(
+        "Denominator is required (for integer exponents, put the integer as the numerator and set the denominator to 1)"
+      );
+    }
+
+    if (denominator === 0) {
+      setError("Denominator cannot be 0");
+      return;
+    }
+
     setHasStarted(true);
     const paragraphsGen: string[] = [];
     let currentLocation = equationsPath;
@@ -64,7 +79,6 @@ const PowerFunctions: NextPage = () => {
     // paragraphsGen.push(`${ending.house.toUpperCase()}!`)
 
     setParagraphs(paragraphsGen);
-    setEquation(ending.equation);
     setGraph(ending.graph);
   };
 
@@ -110,7 +124,7 @@ const PowerFunctions: NextPage = () => {
   return (
     <Container className="mt-4">
       <h1 className="harry-potter">Power Function Sorting Quiz</h1>
-      <p>(For integer exponents, set the denominator to 0)</p>
+      <p>(For integer exponents, set the denominator to 1)</p>
       <p>
         He brought you to the Hogwarts For Magical Functions, and the next thing
         you know, you’re sitting on a chair in front of the whole school with
@@ -153,9 +167,12 @@ const PowerFunctions: NextPage = () => {
       </p>
       <p>“I see you have a lot of promise...”</p>
       {!hasStarted ? (
-        <Button disabled={hasStarted} onClick={handleStart} variant="primary">
-          Start
-        </Button>
+        <>
+          {error !== "" ? <p className="text-danger">{error}</p> : null}
+          <Button disabled={hasStarted} onClick={handleStart} variant="primary">
+            Start
+          </Button>
+        </>
       ) : (
         <p>
           y = x^({sign === "negative" ? "-" : null}
@@ -165,10 +182,9 @@ const PowerFunctions: NextPage = () => {
       {displayedText.map((paragraph, i) => (
         <p key={i.toString()}>{paragraph}</p>
       ))}
-      {hasFinished ? (
+      {hasFinished && numerator !== 0 ? (
         <div>
-          <p>Meet one of the other functions in your house: {equation}</p>
-          <Image alt="Equation graph" src={graph} width={200} height={200} />
+          <img alt="Equation graph" src={graph} />
           <br />
           <Link href="rational-functions">
             <Button>Continue</Button>

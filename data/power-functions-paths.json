@@ -15,7 +15,7 @@
               "requirement": "m % 2 === 1",
               "ending": {
                 "equation": "y = x^3",
-                "graph": "/0-0-0-0.png"
+                "graph": "/odd integer power.PNG"
               }
             },
             {
@@ -23,7 +23,7 @@
               "requirement": "m % 2 === 0",
               "ending": {
                 "equation": "y = x^2",
-                "graph": "/0-0-0-0.png"
+                "graph": "/even integer power.PNG"
               }
             }
           ]
@@ -41,7 +41,7 @@
                   "requirement": "m > n",
                   "ending": {
                     "equation": "y = x^(5/2)",
-                    "graph": "/0-0-0-0.png"
+                    "graph": "/concave up odd-even.PNG"
                   }
                 },
                 {
@@ -49,7 +49,7 @@
                   "requirement": "m < n",
                   "ending": {
                     "equation": "y = x^(1/2)",
-                    "graph": "/0-0-0-0.png"
+                    "graph": "/sqrootius.PNG"
                   }
                 }
               ]
@@ -67,7 +67,7 @@
                       "requirement": "m > n",
                       "ending": {
                         "equation": "y = x^(7/3)",
-                        "graph": "/0-0-0-0.png"
+                        "graph": "/concave up odd-odd.PNG"
                       }
                     },
                     {
@@ -75,7 +75,7 @@
                       "requirement": "m < n",
                       "ending": {
                         "equation": "y = x^(3/7)",
-                        "graph": "/0-0-0-0.png"
+                        "graph": "/S-graph.PNG"
                       }
                     }
                   ]
@@ -89,7 +89,7 @@
                       "requirement": "m > n",
                       "ending": {
                         "equation": "y = x^(9/2)",
-                        "graph": "/0-0-0-0.png"
+                        "graph": "/fraction parabolas.PNG"
                       }
                     },
                     {
@@ -97,7 +97,7 @@
                       "requirement": "m < n",
                       "ending": {
                         "equation": "y = x^(2/9)",
-                        "graph": "/0-0-0-0.png"
+                        "graph": "/seagallus.PNG"
                       }
                     }
                   ]
@@ -117,19 +117,19 @@
           "requirement": "n === 1",
           "children": [
             {
-              "message": "You have an odd exponent",
-              "requirement": "m % 2 === 1",
+              "message": "With a negative odd exponent, you will be sorted into the house of the hidden-rational. These are all odd functions that are symmetrical along the origin. They occupy quadrant 1 and 3, and have asymptotes on the x and y axis",
+              "requirement": "m % 2 === (-1)",
               "ending": {
                 "equation": "y = x^(-3)",
-                "graph": "/0-0-0-0.png"
+                "graph": "/negative odd.PNG"
               }
             },
             {
-              "message": "You have an even exponent",
+              "message": "With a negative even exponent, you will be sorted into the house of the geyser. These are all even functions that are symmetrical along the y-axis. They occupy quadrant 1 and 2, and have asymptotes on the x and y axis",
               "requirement": "m % 2 === 0",
               "ending": {
                 "equation": "y = x^(-2)",
-                "graph": "/0-0-0-0.png"
+                "graph": "/geyser.PNG"
               }
             }
           ]
@@ -139,31 +139,31 @@
           "requirement": "n !== 1",
           "children": [
             {
-              "message": "The denominator is even",
+              "message": "With a negative over even exponent, you will be sorted into one of the most elusive houses of the school, the rampuess. These are functions are rational versions of even root functions. They only occupy quadrant 1, and have asymptotes on the x and y axis",
               "requirement": "n % 2 === 0",
               "ending": {
                 "equation": "y = x^(-5/2)",
-                "graph": "/0-0-0-0.png"
+                "graph": "/negative odd-even.PNG"
               }
             },
             {
               "message": "The denominator is odd",
-              "requirement": "n % 2 === 1",
+              "requirement": "n % 2 === (-1)",
               "children": [
                 {
-                  "message": "The numerator is odd",
-                  "requirement": "m % 2 === 1",
+                  "message": "With a negative odd/odd exponent, you will be sorted into the house of the hidden-rational. These are all odd functions that are symmetrical along the origin. They occupy quadrant 1 and 3, and have asymptotes on the x and y axis",
+                  "requirement": "m % 2 === (-1)",
                   "ending": {
-                    "equation": "y = x^(-3/5)",
-                    "graph": "/0-0-0-0.png"
+                    "equation": "y = x^(-7/3)",
+                    "graph": "/negative odd-odd.PNG"
                   }
                 },
                 {
-                  "message": "Numerator even",
+                  "message": "With a negative even/odd exponent, you will be sorted into the house of the geyser. These are all even functions that are symmetrical along the y-axis. They occupy quadrant 1 and 2, and have asymptotes on the x and y axis",
                   "requirement": "m % 2 === 0",
                   "ending": {
                     "equation": "y = x^(-9/2)",
-                    "graph": "/0-0-0-0.png"
+                    "graph": "/negative even-odd.PNG"
                   }
                 }
               ]
@@ -173,7 +173,7 @@
       ]
     },
     {
-      "message": "zero exponent",
+      "message": "Wait, you have a zero exponent. You are just a horizontal line in disguise! EXPELL THIS IMPOSTER IMMEDIATELY! (Refresh the page to start over)",
       "requirement": "m === 0",
       "ending": {
         "equation": "y = x^0",
