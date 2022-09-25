@@ -62,6 +62,9 @@ const RationalFunctions: NextPage = () => {
       return;
     }
 
+    const leadNum = Algebrite.run(`leading(${sNum})`);
+    const leadDenom = Algebrite.run(`leading(${sDenom})`);
+
     const denomRootsResult: string = Algebrite.run(`roots(${sDenom})`);
     const VAs = getRoots(denomRootsResult);
     const numRootsResult: string = Algebrite.run(`roots(${sNum})`);
@@ -145,7 +148,7 @@ const RationalFunctions: NextPage = () => {
       case 1:
         paragraphsGen.push(
           `Since the degree of num and denom are equal, the graph has a horizontal asymptote at y = ${Algebrite.run(
-            `printhuman((${numConst})/(${denomConst}))`
+            `printhuman((${leadNum})/(${leadDenom}))`
           )}, calculated by dividing the leading coefficients.`
         );
         break;
