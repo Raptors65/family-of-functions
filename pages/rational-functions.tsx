@@ -49,6 +49,17 @@ const RationalFunctions: NextPage = () => {
   };
 
   const handleStart = () => {
+    if (
+      Array.from("qwertyuiopasdfghjklzcvbnm").some(
+        (letter) => numerator.includes(letter) || denominator.includes(letter)
+      )
+    ) {
+      console.error("Found letters other than x");
+      setError(
+        "An error occurred; are you sure that your numerator and denominator are valid polynomials in x?"
+      );
+      return;
+    }
     try {
       setHasStarted(true);
       const paragraphsGen: string[] = [
@@ -67,7 +78,6 @@ const RationalFunctions: NextPage = () => {
 
       // eslint-disable-next-line no-unused-vars
       // const hasHoles = parseInt(Algebrite.run(`deg(sNum) != deg(${numerator})`));
-
       const numDeg: number = parseInt(algebriteRun(`deg(${sNum})`));
       const denomDeg: number = parseInt(algebriteRun(`deg(${sDenom})`));
 
