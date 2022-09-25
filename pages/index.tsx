@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <Container className="mt-4">
       <h1 className="harry-potter">Enter the World of Magical Functions!</h1>
-      <p>By Andy, Lucas, and Stanley</p>
+      <p className="mb-4 names">By Andy, Lucas, and Stanley</p>
       <p>Welcome to the magical world of Hogwarts - Power Functions Edition!</p>
       <p>
         As a child, you have always experienced weird function magic. People

@@ -29,3 +29,7 @@ body {
   margin-right: 10px;
   width: 150px !important;
 }
+
+.names {
+  font-size: 12px;
+}
