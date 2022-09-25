@@ -264,8 +264,8 @@ const RationalFunctions: NextPage = () => {
         <div>
           <img alt="Equation graph" src={graph} />
           <p>
-            You come up with a plan. You can target these asymptotes like a
-            weakness, they will never be able to cast a spell in that location
+            You come up with a plan. You can target these asymptotes/holes like
+            a weakness, they will never be able to cast a spell in that location
             like you can!
           </p>
           <Link href="invertible-functions">
