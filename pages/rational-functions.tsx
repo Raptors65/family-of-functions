@@ -188,7 +188,7 @@ const RationalFunctions: NextPage = () => {
               ...displayedText,
               paragraphs[lastDisplayedIndex + 1].charAt(0),
             ]),
-          500
+          10
         );
       } else {
         setTimeout(
@@ -200,7 +200,7 @@ const RationalFunctions: NextPage = () => {
                   lastDisplayedLetterIndex + 1
                 ),
             ]),
-          10
+          500
         );
       }
     }
@@ -208,37 +208,38 @@ const RationalFunctions: NextPage = () => {
 
   return (
     <Container className="mt-4">
-      <h1 className="harry-potter">
-        Families of Functions - Rational Functions
-      </h1>
+      <h1 className="harry-potter">Function Duel</h1>
       <p>
         You are now in the magical world of Hogwarts - Rational Functions
         Edition. Please type your numerator and denominator polynomials.
       </p>
+      <p>
+        You practice all your spells, and the day before the competition, the
+        competitors are announced! You find out that your opponent is this
+        rational function with numerator
+        <Form.Control
+          className="parameter"
+          disabled={hasStarted}
+          id="numerator"
+          onChange={({ target: { value } }) => setNumerator(value)}
+          type="text"
+          value={numerator}
+        />{" "}
+        and denominator
+        <Form.Control
+          className="parameter"
+          disabled={hasStarted}
+          id="denominator"
+          onChange={({ target: { value } }) => setDenominator(value)}
+          type="text"
+          value={denominator}
+        />
+        .
+      </p>
       {!hasStarted ? (
-        <Form>
-          <Form.Group className="mb-3">
-            <Form.Label htmlFor="numerator">Numerator</Form.Label>
-            <Form.Control
-              id="numerator"
-              onChange={({ target: { value } }) => setNumerator(value)}
-              type="text"
-              value={numerator}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label htmlFor="denominator">Denominator</Form.Label>
-            <Form.Control
-              id="denominator"
-              onChange={({ target: { value } }) => setDenominator(value)}
-              type="text"
-              value={denominator}
-            />
-          </Form.Group>
-          <Button onClick={handleStart} variant="primary">
-            Start
-          </Button>
-        </Form>
+        <Button disabled={hasStarted} onClick={handleStart} variant="primary">
+          Start
+        </Button>
       ) : null}
       {displayedText.map((paragraph, i) => (
         <p key={i.toString()}>{paragraph}</p>
