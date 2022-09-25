@@ -126,7 +126,7 @@ const PowerFunctions: NextPage = () => {
 
   return (
     <Container className="mt-4">
-      <h1 className="harry-potter">Power Function Sorting Quiz</h1>
+      <h1 className="harry-potter">Power Function Sorting</h1>
       <p>(For integer exponents, set the denominator to 1)</p>
       <p>
         He brought you to the Hogwarts For Magical Functions, and the next thing

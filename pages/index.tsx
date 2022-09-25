@@ -25,17 +25,17 @@ const Home: NextPage = () => {
       </p>
       <Link href="/power-functions">
         <Button className="mx-2" variant="primary">
-          Power Functions
+          Part 1 - Power Function Sorting
         </Button>
       </Link>
       <Link href="/rational-functions">
         <Button className="mx-2" variant="secondary">
-          Rational Functions
+          Part 2 - Function Duel
         </Button>
       </Link>
       <Link href="/invertible-functions">
         <Button className="mx-2" variant="danger">
-          Invertible Functions
+          Part 3 - Invertibility
         </Button>
       </Link>
     </Container>
