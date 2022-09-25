@@ -15,13 +15,33 @@ const RationalFunctions: NextPage = () => {
   const [hasStarted, setHasStarted] = useState(false);
   const [paragraphs, setParagraphs] = useState<string[]>([]);
   const [graph, setGraph] = useState("");
+  const [error, setError] = useState("");
+
+  const algebriteRun = (query: string): string => {
+    const result = Algebrite.run(query);
+    if (!result.includes("Stop")) {
+      return result;
+    } else if (
+      result ===
+      "Stop: roots: 1st argument is not a polynomial in the variable x"
+    ) {
+      // Trying to get roots of constant term
+      return "[]";
+    } else {
+      throw new Error("Algebrite error");
+    }
+  };
 
   const getRoots = (algebriteRes: string) => {
     if (algebriteRes.includes("[")) {
-      return algebriteRes
-        .split(",")
-        .filter((root) => !root.includes("i"))
-        .map((root) => root.replace(/[\[\]]/, ""));
+      if (algebriteRes === "[]") {
+        return [];
+      } else {
+        return algebriteRes
+          .split(",")
+          .filter((root) => !root.includes("i"))
+          .map((root) => root.replace(/[\[\]]/, ""));
+      }
     } else {
       // eslint-disable-next-line no-unused-vars
       return [algebriteRes];
@@ -29,155 +49,164 @@ const RationalFunctions: NextPage = () => {
   };
 
   const handleStart = () => {
-    setHasStarted(true);
-    const paragraphsGen: string[] = [
-      "When scouting out your opponent, you learn several things about them.",
-    ];
+    try {
+      setHasStarted(true);
+      const paragraphsGen: string[] = [
+        "When scouting out your opponent, you learn several things about them.",
+      ];
 
-    const simplified: string = Algebrite.run(
-      `simplify((${numerator})/(${denominator}))`
-    );
+      const simplified: string = algebriteRun(
+        `simplify((${numerator})/(${denominator}))`
+      );
 
-    const oNumRoots = getRoots(Algebrite.run(`roots(${numerator})`));
-    const oDenomRoots = getRoots(Algebrite.run(`roots(${denominator})`));
+      const oNumRoots = getRoots(algebriteRun(`roots(${numerator})`));
+      const oDenomRoots = getRoots(algebriteRun(`roots(${denominator})`));
 
-    const holes = oNumRoots
-      .filter((root) => oDenomRoots.includes(root))
-      .map((hole) => [
-        hole,
-        Algebrite.run(simplified.replaceAll(/x/g, hole.toString())),
-      ]);
+      const sNum = algebriteRun(`numerator(${simplified})`);
+      const sDenom = algebriteRun(`denominator(${simplified})`);
 
-    const sNum = Algebrite.run(`numerator(${simplified})`);
-    const sDenom = Algebrite.run(`denominator(${simplified})`);
+      // eslint-disable-next-line no-unused-vars
+      // const hasHoles = parseInt(Algebrite.run(`deg(sNum) != deg(${numerator})`));
 
-    // eslint-disable-next-line no-unused-vars
-    // const hasHoles = parseInt(Algebrite.run(`deg(sNum) != deg(${numerator})`));
+      const numDeg: number = parseInt(algebriteRun(`deg(${sNum})`));
+      const denomDeg: number = parseInt(algebriteRun(`deg(${sDenom})`));
 
-    const numDeg: number = parseInt(Algebrite.run(`deg(${sNum})`));
-    const denomDeg: number = parseInt(Algebrite.run(`deg(${sDenom})`));
+      if (denomDeg === 0) {
+        setHasStarted(false);
+        setError(
+          "That is not a rational function, if the denominator is constant than it is just a factored polynomial!"
+        );
+        return;
+      }
 
-    if (isNaN(numDeg) || isNaN(denomDeg)) {
-      // Error
-      return;
-    }
+      const leadNum = algebriteRun(`leading(${sNum})`);
+      const leadDenom = algebriteRun(`leading(${sDenom})`);
 
-    const leadNum = Algebrite.run(`leading(${sNum})`);
-    const leadDenom = Algebrite.run(`leading(${sDenom})`);
+      const denomRootsResult: string = algebriteRun(`roots(${sDenom})`);
+      const VAs = getRoots(denomRootsResult);
 
-    const denomRootsResult: string = Algebrite.run(`roots(${sDenom})`);
-    const VAs = getRoots(denomRootsResult);
-    const numRootsResult: string = Algebrite.run(`roots(${sNum})`);
-    const numRoots = getRoots(numRootsResult);
+      // const numRootsResult: string = algebriteRun(`roots(${sNum})`);
+      // const numRoots = getRoots(numRootsResult);
 
-    // eslint-disable-next-line no-unused-vars
-    const numConst: string = Algebrite.run(`coeff(${sNum}, 0)`);
-    // eslint-disable-next-line no-unused-vars
-    const denomConst: string = Algebrite.run(`coeff(${sDenom}, 0)`);
+      const holes = oNumRoots
+        .filter((root) => oDenomRoots.includes(root) && !VAs.includes(root))
+        .map((hole) => [
+          hole,
+          algebriteRun(simplified.replaceAll(/x/g, hole.toString())),
+        ]);
 
-    Algebrite.run("x = 0");
-    // eslint-disable-next-line no-unused-vars
-    const yInt: string = Algebrite.run(sNum);
+      // const numConst: string = algebriteRun(`coeff(${sNum}, 0)`);
+      // const denomConst: string = algebriteRun(`coeff(${sDenom}, 0)`);
 
-    console.log({
-      holes,
-      numDeg,
-      denomDeg,
-      VAs,
-      numRoots,
-      numConst,
-      denomConst,
-    });
+      algebriteRun("x = 0");
+      // const yInt: string = algebriteRun(sNum);
 
-    if (holes.length > 0) {
-      if (holes.length > 1) {
+      /* console.log({
+        holes,
+        numDeg,
+        denomDeg,
+        VAs,
+        numRoots,
+        numConst,
+        denomConst,
+      });*/
+
+      if (holes.length > 0) {
+        if (holes.length > 1) {
+          paragraphsGen.push(
+            `The opposing function has holes at ${holes
+              .map((pair) => `(${pair[0]}, ${pair[1]})`)
+              .join(
+                ", "
+              )}. This means that the numerator and denominator have common factors. They cancel out, making the shape of the graph simpler, but the denominator still equals 0 at that point.`
+          );
+        } else {
+          paragraphsGen.push(
+            `The opposing function has a hole at (${holes[0][0]}, ${holes[0][1]}). This means that the numerator and denominator have a common factor. They cancel out, making the shape of the graph simpler, but the denominator still equals 0 at that point.`
+          );
+        }
+      } else {
         paragraphsGen.push(
-          `The opposing function has holes at ${holes
-            .map((pair) => `(${pair[0]}, ${pair[1]})`)
-            .join(
+          "The opposing function doesn't have holes. Their numerator and denominator don't have a common factor."
+        );
+      }
+
+      const hasVAs = VAs.length > 0;
+      if (hasVAs) {
+        if (VAs.length > 1) {
+          paragraphsGen.push(
+            `The opposing rational function has vertical asymptotes at x = ${VAs.join(
               ", "
-            )}. This means that the numerator and denominator have common factors. They cancel out, making the shape of the graph simpler, but the denominator still equals 0 at that point.`
-        );
+            )}. These are the locations where the denominator equals 0.`
+          );
+        } else {
+          paragraphsGen.push(
+            `The opposing rational function has a vertical asymptote at x = ${VAs[0]}. These is the location where the denominator equals 0.`
+          );
+        }
       } else {
         paragraphsGen.push(
-          `The opposing function has a hole at (${holes[0][0]}, ${holes[0][1]}). This means that the numerator and denominator have a common factor. They cancel out, making the shape of the graph simpler, but the denominator still equals 0 at that point.`
+          "The opposing function has no vertical asymptotes, which means that the denominator is never equal to 0."
         );
       }
-    } else {
-      paragraphsGen.push(
-        "The opposing function doesn't have holes. Their numerator and denominator don't have a common factor."
-      );
-    }
 
-    const hasVAs = VAs.length > 0;
-    if (hasVAs) {
-      if (VAs.length > 1) {
-        paragraphsGen.push(
-          `The opposing rational function has vertical asymptotes at x = ${VAs.join(
-            ", "
-          )}. These are the locations where the denominator equals 0.`
-        );
-      } else {
-        paragraphsGen.push(
-          `The opposing rational function has a vertical asymptote at x = ${VAs[0]}. These is the location where the denominator equals 0.`
-        );
+      const otherAsymptotes =
+        numDeg < denomDeg
+          ? 0 // horizontal at 0
+          : numDeg === denomDeg
+          ? 1 // horizontal at c
+          : numDeg === denomDeg + 1
+          ? 2 // oblique
+          : numDeg === denomDeg + 2
+          ? 3 // parabolic
+          : 4; // other
+
+      switch (otherAsymptotes) {
+        case 0:
+          paragraphsGen.push(
+            "The opposing function is part of the Zero Horizontals! It has a horizontal asymptote at y = 0, this means the degree of the numerator is less than the degree of the denominator. Horizontal asymptote can be found by dividing the leading coefficient of numerator and denominator. If the numerator has a lower degree, then the leading coefficient is essentially 0."
+          );
+          break;
+        case 1:
+          paragraphsGen.push(
+            `The opposing function is part of the Non-zero Horizontals! Since the degree of the numerator and denominator are equal, the graph has a horizontal asymptote at y = ${algebriteRun(
+              `printhuman((${leadNum})/(${leadDenom}))`
+            )}, calculated by dividing the leading coefficients.`
+          );
+          break;
+        case 2:
+          paragraphsGen.push(
+            "The opposing function is part of the Obliquess! There is an oblique asymptote, the degree of the numerator is 1 greater than the denominator. If you try to divide the leading coefficients, it leads to a result of n/0, which does not exist."
+          );
+          break;
+        case 3:
+          paragraphsGen.push(
+            "The opposing function is part of the Parabolis! There is a parabolic asymptote, the degree of the numerator is more than 2 greater than the denominator. If you try to divide the leading coefficients, it leads to a result of n/0, which does not exist."
+          );
+          break;
+        case 4:
+          paragraphsGen.push(
+            "Interesting, the degree of their numerator is more than the degree of their denominator plus two! Becuase of this, no one knows what house they're part of. They probably have an asymptote of an unknown shape."
+          );
+          break;
       }
-    } else {
+
       paragraphsGen.push(
-        "The opposing function has no vertical asymptotes, which means that the denominator is never equal to 0."
+        "You use a spell called “desmosempra” to better illustrate this fact with another member of your competitor's house."
+      );
+      paragraphsGen.push("Desmosempra!");
+
+      const graph = rationalFunctionsPaths[otherAsymptotes];
+
+      setParagraphs(paragraphsGen);
+      setGraph(graph);
+    } catch (e) {
+      console.error(e);
+      setHasStarted(false);
+      setError(
+        "An error occurred; are you sure that your numerator and denominator are valid polynomials in x?"
       );
     }
-
-    const otherAsymptotes =
-      numDeg < denomDeg
-        ? 0 // horizontal at 0
-        : numDeg === denomDeg
-        ? 1 // horizontal at c
-        : numDeg === denomDeg + 1
-        ? 2 // oblique
-        : numDeg === denomDeg + 2
-        ? 3 // parabolic
-        : 4; // other
-
-    switch (otherAsymptotes) {
-      case 0:
-        paragraphsGen.push(
-          "The opposing function has a horizontal asymptote at y = 0, this means the degree of the numerator is less than the degree of the denominator. Horizontal asymptote can be found by dividing the leading coefficient of numerator and denominator. If the numerator has a lower degree, then the leading coefficient is essentially 0."
-        );
-        break;
-      case 1:
-        paragraphsGen.push(
-          `Since the degree of num and denom are equal, the graph has a horizontal asymptote at y = ${Algebrite.run(
-            `printhuman((${leadNum})/(${leadDenom}))`
-          )}, calculated by dividing the leading coefficients.`
-        );
-        break;
-      case 2:
-        paragraphsGen.push(
-          "There is an oblique asymptote, the degree of the numerator is 1 greater than the denominator. If you try to divide the leading coefficients, it leads to a result of n/0, which does not exist."
-        );
-        break;
-      case 3:
-        paragraphsGen.push(
-          "There might be another asymptote, the degree of the numerator is more than 2 greater than the denominator. If you try to divide the leading coefficients, it leads to a result of n/0, which does not exist."
-        );
-        break;
-      case 4:
-        paragraphsGen.push(
-          "Interesting, the degree of their numerator is more than the degree of their denominator plus two! They probably have an asymptote of an unknown shape."
-        );
-        break;
-    }
-
-    paragraphsGen.push(
-      "You use a spell called “desmosempra” to better illustrate this fact."
-    );
-    paragraphsGen.push("Desmosempra!");
-
-    const graph = rationalFunctionsPaths[otherAsymptotes];
-
-    setParagraphs(paragraphsGen);
-    setGraph(graph);
   };
 
   const hasFinished =
@@ -253,9 +282,12 @@ const RationalFunctions: NextPage = () => {
         .
       </p>
       {!hasStarted ? (
-        <Button disabled={hasStarted} onClick={handleStart} variant="primary">
-          Start
-        </Button>
+        <>
+          <p className="text-danger">{error}</p>
+          <Button disabled={hasStarted} onClick={handleStart} variant="primary">
+            Start
+          </Button>
+        </>
       ) : null}
       {displayedText.map((paragraph, i) => (
         <p key={i.toString()}>{paragraph}</p>

@@ -34,14 +34,17 @@ const PowerFunctions: NextPage = () => {
   const [error, setError] = useState("");
 
   const handleStart = () => {
+    console.log(numerator, denominator);
     if (isNaN(numerator)) {
       setError("Numerator is required");
+      return;
     }
 
     if (isNaN(denominator)) {
       setError(
         "Denominator is required (for integer exponents, put the integer as the numerator and set the denominator to 1)"
       );
+      return;
     }
 
     if (denominator === 0) {
@@ -174,8 +177,8 @@ const PowerFunctions: NextPage = () => {
           </Button>
         </>
       ) : (
-        <p>
-          y = x^({sign === "negative" ? "-" : null}
+        <p className="lead fw-bold">
+          You are: y = x^({sign === "negative" ? "-" : null}
           {Algebrite.run(`${numerator}/${denominator}`)})
         </p>
       )}
