@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import powerFunctionsPaths from "../data/power-functions-paths.json";
+import Link from "next/link";
 
 const Algebrite = require("algebrite");
 
@@ -59,6 +60,9 @@ const PowerFunctions: NextPage = () => {
     }
 
     const ending = currentLocation.ending!;
+
+    // paragraphsGen.push(`${ending.house.toUpperCase()}!`)
+
     setParagraphs(paragraphsGen);
     setEquation(ending.equation);
     setGraph(ending.graph);
@@ -85,7 +89,7 @@ const PowerFunctions: NextPage = () => {
               ...displayedText,
               paragraphs[lastDisplayedIndex + 1].charAt(0),
             ]),
-          10
+          500
         );
       } else {
         setTimeout(
@@ -97,7 +101,7 @@ const PowerFunctions: NextPage = () => {
                   lastDisplayedLetterIndex + 1
                 ),
             ]),
-          500
+          10
         );
       }
     }
@@ -105,53 +109,52 @@ const PowerFunctions: NextPage = () => {
 
   return (
     <Container className="mt-4">
-      <h1 className="harry-potter">Families of Functions - Power Functions</h1>
+      <h1 className="harry-potter">Power Function Sorting Quiz</h1>
       <p>
-        You are now in the magical world of Hogwarts - Power Functions Edition.
-        Please choose your exponent. (If you want an integer exponent, set
-        denominator = 1 and your numerator will be your exponent)
+        He brought you to the Hogwarts For Magical Functions, and the next thing
+        you know, you&apos;re sitting on a chair in front of the whole school
+        with the magical function sorting hat on you.
       </p>
+      <p>
+        “Hmm… Difficult…. Very Difficult…”, the hat ponders, “a
+        <Form.Select
+          className="parameter"
+          disabled={hasStarted}
+          onChange={({ target: { value } }) => setSign(value as Sign)}
+          value={sign}
+        >
+          <option value="positive">positive</option>
+          <option value="negative">negative</option>
+        </Form.Select>
+        exponent I see, an exponent of
+        <Form.Control
+          className="parameter"
+          disabled={hasStarted}
+          id="numerator"
+          min={0}
+          onChange={({ target: { value } }) => setNumerator(parseInt(value))}
+          step={1}
+          type="number"
+          value={numerator}
+        />{" "}
+        over
+        <Form.Control
+          className="parameter"
+          disabled={hasStarted}
+          id="denominator"
+          min={1}
+          onChange={({ target: { value } }) => setDenominator(parseInt(value))}
+          step={1}
+          type="number"
+          value={denominator}
+        />{" "}
+        as well...”
+      </p>
+      <p>“I see you have a lot of promise...”</p>
       {!hasStarted ? (
-        <Form>
-          <Form.Group className="mb-3">
-            <Form.Select
-              onChange={({ target: { value } }) => setSign(value as Sign)}
-              value={sign}
-            >
-              <option value="positive">&#43;</option>
-              <option value="negative">&minus;</option>
-            </Form.Select>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label htmlFor="numerator">Numerator</Form.Label>
-            <Form.Control
-              id="numerator"
-              min={0}
-              onChange={({ target: { value } }) =>
-                setNumerator(parseInt(value))
-              }
-              step={1}
-              type="number"
-              value={numerator}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label htmlFor="denominator">Denominator</Form.Label>
-            <Form.Control
-              id="denominator"
-              min={1}
-              onChange={({ target: { value } }) =>
-                setDenominator(parseInt(value))
-              }
-              step={1}
-              type="number"
-              value={denominator}
-            />
-          </Form.Group>
-          <Button onClick={handleStart} variant="primary">
-            Start
-          </Button>
-        </Form>
+        <Button disabled={hasStarted} onClick={handleStart} variant="primary">
+          Start
+        </Button>
       ) : (
         <p>
           y = x^({sign === "negative" ? "-" : null}
@@ -165,6 +168,10 @@ const PowerFunctions: NextPage = () => {
         <div>
           <p>Meet one of the other functions in your house: {equation}</p>
           <Image alt="Equation graph" src={graph} width={200} height={200} />
+          <br />
+          <Link href="rational-functions">
+            <Button>Continue</Button>
+          </Link>
         </div>
       ) : null}
     </Container>

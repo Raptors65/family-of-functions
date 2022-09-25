@@ -1,17 +1,17 @@
 {
-  "message": "Throughout your entire life, you, Harry Potter, have been experiencing weird function magic. One day, a hairy function came over to your house and said the words that changed your life: \"Yer a power function, Harry.\" You're now at the sorting ceremony where they sort new power functions into houses, and unexpectedly, the magical function sorting hat talks to you.",
+  "message": "You have been experiencing weird function magic. Yer a function harry. the function sorting hat talks to you for some reason",
   "requirement": "true",
   "children": [
     {
-      "message": "\"I see you have a positive exponent. This must mean you have no asymptotes.\"",
+      "message": "You have a positive exponent",
       "requirement": "m > 0",
       "children": [
         {
-          "message": "\"Your exponent is an integer as well, so your domain covers all the real numbers.\"",
+          "message": "You have an integer exponent",
           "requirement": "n === 1",
           "children": [
             {
-              "message": "Your exponent is odd.",
+              "message": "You have an odd exponent, you're in the house of the odd powers \nThese are all odd functions that are symmetrical along the origin. \nThey occupy quadrant 1 and 3, having an upwards and downwards arm. \nGraphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic",
               "requirement": "m % 2 === 1",
               "ending": {
                 "equation": "y = x^3",
@@ -19,7 +19,7 @@
               }
             },
             {
-              "message": "You have an even exponent, you're now in the house led by the parabolas",
+              "message": "You have an even exponent, you're now in the house led by the parabolas \nThese are all even functions that are symmetrical along the y axis. They occupy quadrant 1 and 2, having 2 upwards arms in a U shape. \nGraphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic",
               "requirement": "m % 2 === 0",
               "ending": {
                 "equation": "y = x^2",
@@ -33,11 +33,11 @@
           "requirement": "n !== 1",
           "children": [
             {
-              "message": "The denominator is even",
+              "message": "You have a denominator that is even",
               "requirement": "n % 2 === 0",
               "children": [
                 {
-                  "message": "it is concave up",
+                  "message": "You'll be sorted into a small house. This one contains graphs that only occupy quadrant 1 and curve upwards like a parabola. Your house has a lot in common with the square roots, but the slope increases as x increases.",
                   "requirement": "m > n",
                   "ending": {
                     "equation": "y = x^(5/2)",
@@ -45,7 +45,7 @@
                   }
                 },
                 {
-                  "message": "it is concave down",
+                  "message": "You belong to the house of sqrootius, named after the founder, the square root function. These functions are neither odd nor even, and only occupy quadrant 1. They increase quickly to (1,1), then curve downwards, having a smaller slope as x increases.",
                   "requirement": "m < n",
                   "ending": {
                     "equation": "y = x^(1/2)",
@@ -63,7 +63,7 @@
                   "requirement": "m % 2 === 1",
                   "children": [
                     {
-                      "message": "concave up",
+                      "message": "You have an odd/odd exponent, you're in the house of the odd-fraction powers \nThese are all odd functions that are symmetrical along the origin. \nThey occupy quadrant 1 and 3, having an upwards and downwards arm. \nGraphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic",
                       "requirement": "m > n",
                       "ending": {
                         "equation": "y = x^(7/3)",
@@ -71,7 +71,7 @@
                       }
                     },
                     {
-                      "message": "concave down",
+                      "message": "Ah, the S-house\nThese graphs are all odd functions that occupy quadrants 1 and 3, and are a cousin to the odd powers. However, they curve down instead of up, and look like an S.",
                       "requirement": "m < n",
                       "ending": {
                         "equation": "y = x^(3/7)",
@@ -81,7 +81,7 @@
                   ]
                 },
                 {
-                  "message": "Numerator even",
+                  "message": "You have an even/odd exponent, you're now in the house led by the fraction-parabolas \nThese are all even functions that are symmetrical along the y axis. They occupy quadrant 1 and 2, having 2 upwards arms in a U shape. \nGraphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic",
                   "requirement": "m % 2 === 0",
                   "children": [
                     {
@@ -93,7 +93,7 @@
                       }
                     },
                     {
-                      "message": "concave down",
+                      "message": "You belong in house Seagallus, a cousin to the parabolas. \nThese are all even functions that are symmetrical along the y axis. They occupy quadrant 1 and 2, and have 2 downwards curving arms in either direction. Named after the mysterious seagull.",
                       "requirement": "m < n",
                       "ending": {
                         "equation": "y = x^(2/9)",

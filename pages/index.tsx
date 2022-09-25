@@ -20,8 +20,7 @@ const Home: NextPage = () => {
         banged heavily on the door. You ran to open it because you thought that
         if you didn’t he would’ve knocked the door down himself anyways. You
         stared into the giant beast of a function in front of you as he said the
-        words that will change your life: &quot;Yer a power function,
-        Harry.&quot;
+        words that will change your life: “Yer a power function, Harry.”
       </p>
       <Link href="/power-functions">
         <Button className="mx-2" variant="primary">

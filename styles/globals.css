@@ -22,3 +22,10 @@ body {
 .desmos {
   border: 1px solid #ccc;
 }
+
+.parameter {
+  display: inline-block !important;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 150px !important;
+}
