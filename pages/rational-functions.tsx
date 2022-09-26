@@ -206,7 +206,7 @@ const RationalFunctions: NextPage = () => {
           break;
         case 4:
           paragraphsGen.push(
-            "Interesting, the degree of their numerator is more than the degree of their denominator plus two! Becuase of this, no one knows what house they're part of. They probably have an asymptote of an unknown shape."
+            "Interesting, the degree of their numerator is greater than the degree of their denominator plus two or even more! Becuase of this, no one knows what house they're part of. They probably have an asymptote of an unknown shape."
           );
           break;
       }
