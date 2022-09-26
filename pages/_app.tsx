@@ -7,6 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Magical Functions - Andy, Lucas, Stanley</title>
       </Head>
       <Component {...pageProps} />
