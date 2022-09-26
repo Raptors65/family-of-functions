@@ -250,7 +250,7 @@ const RationalFunctions: NextPage = () => {
               ...displayedText,
               paragraphs[lastDisplayedIndex + 1].charAt(0),
             ]),
-          1
+          15
         );
       } else {
         setTimeout(
@@ -262,7 +262,7 @@ const RationalFunctions: NextPage = () => {
                   lastDisplayedLetterIndex + 1
                 ),
             ]),
-          1
+          7
         );
       }
     }
