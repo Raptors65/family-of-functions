@@ -81,7 +81,9 @@ const RationalFunctions: NextPage = () => {
       const numDeg: number = parseInt(algebriteRun(`deg(${sNum})`));
       const denomDeg: number = parseInt(algebriteRun(`deg(${sDenom})`));
 
-      if (denomDeg === 0) {
+      const oDenomDeg: number = parseInt(algebriteRun(`deg(${denominator})`));
+
+      if (oDenomDeg === 0) {
         setHasStarted(false);
         setError(
           "That is not a rational function, if the denominator is constant than it is just a factored polynomial!"
@@ -94,7 +96,14 @@ const RationalFunctions: NextPage = () => {
 
       const denomRootsResult: string = algebriteRun(`roots(${sDenom})`);
       const factoredVAs = getRoots(denomRootsResult);
-      const calcRootsResult: string = algebriteRun(`nroots(${sDenom})`);
+
+      let calcRootsResult: string;
+      try {
+        calcRootsResult = algebriteRun(`nroots(${sDenom})`);
+      } catch (e) {
+        console.error("nroots error");
+        calcRootsResult = "[]";
+      }
       const VAs = getRoots(calcRootsResult).map((VA) => parseFloat(VA));
 
       // const numRootsResult: string = algebriteRun(`roots(${sNum})`);
@@ -206,7 +215,7 @@ const RationalFunctions: NextPage = () => {
           break;
         case 4:
           paragraphsGen.push(
-            "Interesting, the degree of their numerator is greater than the degree of their denominator plus two or even more! Becuase of this, no one knows what house they're part of. They probably have an asymptote of an unknown shape."
+            "Interestingly, the degree of their numerator is greater than the degree of their denominator plus two or even more! Becuase of this, no one knows what house they're part of. They probably have an asymptote of an unknown shape."
           );
           break;
       }
