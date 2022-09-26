@@ -11,7 +11,7 @@
           "requirement": "n === 1",
           "children": [
             {
-              "message": "You have an odd exponent, you're in the house of the odd powers. These are all odd functions that are symmetrical along the origin. They occupy quadrant 1 and 3, having an upwards and downwards arm. Graphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic",
+              "message": "You have an odd exponent, you're in the house of the odd powers. These are all odd functions that are symmetrical along the origin. They occupy quadrant 1 and 3, having an upwards and downwards arm. Graphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic.",
               "requirement": "m % 2 === 1",
               "ending": {
                 "equation": "y = x^3",
@@ -19,7 +19,7 @@
               }
             },
             {
-              "message": "You have an even exponent, you're now in the house led by the parabolas. These are all even functions that are symmetrical along the y axis. They occupy quadrant 1 and 2, having 2 upwards arms in a U shape. Graphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic",
+              "message": "You have an even exponent, you're now in the house led by the parabolas. These are all even functions that are symmetrical along the y axis. They occupy quadrant 1 and 2, having 2 upwards arms in a U shape. Graphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic.",
               "requirement": "m % 2 === 0",
               "ending": {
                 "equation": "y = x^2",
@@ -63,7 +63,7 @@
                   "requirement": "m % 2 === 1",
                   "children": [
                     {
-                      "message": "You have an odd/odd exponent, you're in the house of the odd-fraction powers. These are all odd functions that are symmetrical along the origin. They occupy quadrant 1 and 3, having an upwards and downwards arm. Graphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic",
+                      "message": "You have an odd/odd exponent, you're in the house of the odd-fraction powers. These are all odd functions that are symmetrical along the origin. They occupy quadrant 1 and 3, having an upwards and downwards arm. Graphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic.",
                       "requirement": "m > n",
                       "ending": {
                         "equation": "y = x^(7/3)",
@@ -85,7 +85,7 @@
                   "requirement": "m % 2 === 0",
                   "children": [
                     {
-                      "message": "You have an even/odd exponent, you're now in the house led by the fraction-parabolas. These are all even functions that are symmetrical along the y axis. They occupy quadrant 1 and 2, having 2 upwards arms in a U shape. Graphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic",
+                      "message": "You have an even/odd exponent, you're now in the house led by the fraction-parabolas. These are all even functions that are symmetrical along the y axis. They occupy quadrant 1 and 2, having 2 upwards arms in a U shape. Graphs vary by the value of the exponent, larger exponents make the upwards slope of these graphs more dramatic.",
                       "requirement": "m > n",
                       "ending": {
                         "equation": "y = x^(9/2)",
@@ -117,7 +117,7 @@
           "requirement": "n === 1",
           "children": [
             {
-              "message": "With a negative odd exponent, you will be sorted into the house of the hidden-rational. These are all odd functions that are symmetrical along the origin. They occupy quadrant 1 and 3, and have asymptotes on the x and y axis",
+              "message": "With a negative odd exponent, you will be sorted into the house of the hidden-rational. These are all odd functions that are symmetrical along the origin. They occupy quadrant 1 and 3, and have asymptotes on the x and y axis.",
               "requirement": "m % 2 !== 0",
               "ending": {
                 "equation": "y = x^(-3)",
@@ -125,7 +125,7 @@
               }
             },
             {
-              "message": "With a negative even exponent, you will be sorted into the house of the geyser. These are all even functions that are symmetrical along the y-axis. They occupy quadrant 1 and 2, and have asymptotes on the x and y axis",
+              "message": "With a negative even exponent, you will be sorted into the house of the geyser. These are all even functions that are symmetrical along the y-axis. They occupy quadrant 1 and 2, and have asymptotes on the x and y axis.",
               "requirement": "m % 2 === 0",
               "ending": {
                 "equation": "y = x^(-2)",
@@ -139,7 +139,7 @@
           "requirement": "n !== 1",
           "children": [
             {
-              "message": "With a negative over even exponent, you will be sorted into one of the most elusive houses of the school, the rampuess. These are functions are rational versions of even root functions. They only occupy quadrant 1, and have asymptotes on the x and y axis",
+              "message": "With a negative over even exponent, you will be sorted into one of the most elusive houses of the school, the rampuess. These are functions are rational versions of even root functions. They only occupy quadrant 1, and have asymptotes on the x and y axis.",
               "requirement": "n % 2 === 0",
               "ending": {
                 "equation": "y = x^(-5/2)",
@@ -151,7 +151,7 @@
               "requirement": "n % 2 !== 0",
               "children": [
                 {
-                  "message": "With a negative odd/odd exponent, you will be sorted into the house of the hidden-rational. These are all odd functions that are symmetrical along the origin. They occupy quadrant 1 and 3, and have asymptotes on the x and y axis",
+                  "message": "With a negative odd/odd exponent, you will be sorted into the house of the hidden-rational. These are all odd functions that are symmetrical along the origin. They occupy quadrant 1 and 3, and have asymptotes on the x and y axis.",
                   "requirement": "m % 2 !== 0",
                   "ending": {
                     "equation": "y = x^(-7/3)",
@@ -159,7 +159,7 @@
                   }
                 },
                 {
-                  "message": "With a negative even/odd exponent, you will be sorted into the house of the geyser. These are all even functions that are symmetrical along the y-axis. They occupy quadrant 1 and 2, and have asymptotes on the x and y axis",
+                  "message": "With a negative even/odd exponent, you will be sorted into the house of the geyser. These are all even functions that are symmetrical along the y-axis. They occupy quadrant 1 and 2, and have asymptotes on the x and y axis.",
                   "requirement": "m % 2 === 0",
                   "ending": {
                     "equation": "y = x^(-9/2)",
