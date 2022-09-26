@@ -93,13 +93,17 @@ const RationalFunctions: NextPage = () => {
       const leadDenom = algebriteRun(`leading(${sDenom})`);
 
       const denomRootsResult: string = algebriteRun(`roots(${sDenom})`);
-      const VAs = getRoots(denomRootsResult);
+      const factoredVAs = getRoots(denomRootsResult);
+      const calcRootsResult: string = algebriteRun(`nroots(${sDenom})`);
+      const VAs = getRoots(calcRootsResult).map((VA) => parseFloat(VA));
 
       // const numRootsResult: string = algebriteRun(`roots(${sNum})`);
       // const numRoots = getRoots(numRootsResult);
 
       const holes = oNumRoots
-        .filter((root) => oDenomRoots.includes(root) && !VAs.includes(root))
+        .filter(
+          (root) => oDenomRoots.includes(root) && !factoredVAs.includes(root)
+        )
         .map((hole) => [
           hole,
           algebriteRun(simplified.replaceAll(/x/g, hole.toString())),
@@ -111,15 +115,13 @@ const RationalFunctions: NextPage = () => {
       algebriteRun("x = 0");
       // const yInt: string = algebriteRun(sNum);
 
-      /* console.log({
+      console.log({
         holes,
         numDeg,
         denomDeg,
         VAs,
-        numRoots,
-        numConst,
-        denomConst,
-      });*/
+        oDenomRoots,
+      });
 
       if (holes.length > 0) {
         if (holes.length > 1) {
@@ -143,6 +145,13 @@ const RationalFunctions: NextPage = () => {
 
       const hasVAs = VAs.length > 0;
       if (hasVAs) {
+        /* if (VAs.some((va) => va.length >= 20)) {
+          paragraphsGen.push(
+            `The opposing rational function has ${
+              VAs.length
+            } vertical asymptote${VAs.length === 1 ? "" : "s"}.`
+          );
+        } else {*/
         if (VAs.length > 1) {
           paragraphsGen.push(
             `The opposing rational function has vertical asymptotes at x = ${VAs.join(
@@ -154,6 +163,7 @@ const RationalFunctions: NextPage = () => {
             `The opposing rational function has a vertical asymptote at x = ${VAs[0]}. These is the location where the denominator equals 0.`
           );
         }
+        // }
       } else {
         paragraphsGen.push(
           "The opposing function has no vertical asymptotes, which means that the denominator is never equal to 0."
