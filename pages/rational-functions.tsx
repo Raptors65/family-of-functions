@@ -10,8 +10,8 @@ const Algebrite = require("algebrite");
 
 const RationalFunctions: NextPage = () => {
   const [displayedText, setDisplayedText] = useState<string[]>([""]);
-  const [numerator, setNumerator] = useState("x^2-1");
-  const [denominator, setDenominator] = useState("x^2-2x-3");
+  const [numerator, setNumerator] = useState("");
+  const [denominator, setDenominator] = useState("");
   const [hasStarted, setHasStarted] = useState(false);
   const [paragraphs, setParagraphs] = useState<string[]>([]);
   const [graph, setGraph] = useState("");
@@ -287,6 +287,7 @@ const RationalFunctions: NextPage = () => {
           disabled={hasStarted}
           id="numerator"
           onChange={({ target: { value } }) => setNumerator(value)}
+          placeholder="x^2 - 1"
           type="text"
           value={numerator}
         />{" "}
@@ -296,6 +297,7 @@ const RationalFunctions: NextPage = () => {
           disabled={hasStarted}
           id="denominator"
           onChange={({ target: { value } }) => setDenominator(value)}
+          placeholder="x^2 - 2x - 3"
           type="text"
           value={denominator}
         />
