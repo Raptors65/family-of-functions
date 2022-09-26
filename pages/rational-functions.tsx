@@ -81,12 +81,10 @@ const RationalFunctions: NextPage = () => {
       const numDeg: number = parseInt(algebriteRun(`deg(${sNum})`));
       const denomDeg: number = parseInt(algebriteRun(`deg(${sDenom})`));
 
-      const oDenomDeg: number = parseInt(algebriteRun(`deg(${denominator})`));
-
-      if (oDenomDeg === 0) {
+      if (denomDeg === 0) {
         setHasStarted(false);
         setError(
-          "That is not a rational function, if the denominator is constant than it is just a factored polynomial!"
+          "That is not a rational function, as it can simplify to a polynomial!"
         );
         return;
       }
